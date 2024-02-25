@@ -1,5 +1,5 @@
 {
-	"name": "react-webpack",
+	"name": "delete-all-products",
 	"version": "1.0.0",
 	"description": "In this Article we will learn how to create a React App with Webpack 5.",
 	"main": "index.js",
@@ -11,15 +11,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://hasanchy@github.com/hasanchy/react-webpack.git"
+		"url": "git+https://hasanchy@github.com/hasanchy/delete-all-products.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/hasanchy/react-webpack/issues"
+		"url": "https://github.com/hasanchy/delete-all-products/issues"
 	},
-	"homepage": "https://github.com/hasanchy/react-webpack#readme",
+	"homepage": "https://github.com/hasanchy/delete-all-products#readme",
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
 		"@types/react-dom": "^18.2.4",

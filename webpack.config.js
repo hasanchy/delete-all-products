@@ -1,15 +1,20 @@
 const path = require('path');
 const defaults = require('@wordpress/scripts/config/webpack.config.js');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
 	...defaults,
 	entry: {
-		scripts: path.resolve(process.cwd(), 'src/public/ts', 'admin.tsx')
+		scripts: path.resolve(process.cwd(), 'src/public/dev', 'admin.tsx')
 	},
 	output: {
-		filename: '[name].js',
-		path: path.resolve(process.cwd(), 'build'),
+		// filename: '[name].js',
+		filename: 'admin.lite.js',
+		path: path.resolve(process.cwd(), 'public/dist'),
 	},
+	plugins: [new MiniCssExtractPlugin({
+		filename:'admin.css'
+	})],
 	module: {
 		...defaults.module,
 		rules: [
@@ -25,7 +30,7 @@ module.exports = {
 						}
 					}
 				]
-			}
+			},
 		]
 	},
 	resolve: {

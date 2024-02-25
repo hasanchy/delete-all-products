@@ -1,106 +1,43 @@
 <?php
 /**
- * Plugin Name: Delete Woocommerce Products
- * Plugin URI: https://wordpress.org/plugins/delete-woocommerce-products/
- * Description: A WordPress plugin to Delete Woocommerce Products listed on the Shop page
- * Version: 1.0.0
- * Author: Hasan Chowdhury
- * Author URI: https://auburnforest.com/
- * Developer: Hasan Chowdhury
- * Developer URI: https://auburnforest.com/
- * Text Domain:  delete-woocommerce-products
+ * Main file for WordPress.
+ * 
+ * @wordpress-plugin
+ * Plugin Name:     Delete All Products
+ * Description:     Efficiently delete all WooCommerce products in just a few clicks
+ * Author:          Themedyno
+ * Author URI:      https://themedyno.com/
+ * Version:         1.0.3
+ * Text Domain:     delete-all-products
+ * Domain Path:	    /languages
  *
- * License: GNU General Public License v3.0
- * License URI: http://www.gnu.org/licenses/gpl-3.0.html
- *
+ * License: GPLv2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
+defined('ABSPATH') or die('No direct access allowed!'); // Avoid direct file request
 
-if( ! defined( 'ABSPATH' ) ) : exit(); endif; // No direct access allowed.
-add_filter( 'plugin_action_links_' . plugin_basename(__FILE__), 'add_action_links' );
-
-function add_action_links ( $actions ) {
-	$delete_link = sprintf('<a href="%s">%s</a>', admin_url('edit.php?post_type=product&page=dwp-page'), __('Delete Products', 'wooazon-settings'));
-   	array_unshift($actions, $delete_link);
-
-   	return $actions;
+/**
+ * Plugin constants. This file is procedural coding style for initialization of
+ * the plugin core and definition of plugin configuration.
+ */
+if (defined('DAP_PATH')) {
+    require_once dirname(__FILE__) . '/inc/base/others/fallback-already.php';
+    return;
 }
 
-if ( ! class_exists( 'DeleteWooProducts' ) ) {
-	/**
-	 * Main plugin class
-	 */
-	class DeleteWooProducts {
+define('DAP_FILE', __FILE__);
+define('DAP_PATH', dirname(DAP_FILE));
+define('DAP_SLUG', basename(DAP_PATH));
+define('DAP_INC', DAP_PATH . '/inc/');
+define('DAP_MIN_PHP', '7.2.0'); // Minimum of PHP 7.2 required for autoloading and namespacing
+define('DAP_MIN_WP', '5.2.0'); // Minimum of WordPress 5.0 required
+define('DAP_NS', 'DAP');
+define('DAP_IS_PRO', false);
+define('DAP_SLUG_LITE', 'delete-wordpress-products');
+define('DAP_SLUG_PRO', 'delete-wordpress-products-pro');
 
-		private static $instance;
-
-		public static function instance() {
-			if( ! isset( self::$instance ) && ! (self::$instance instanceof DeleteWooProducts ) ) {
-				self::$instance = new DeleteWooProducts;
-				self::$instance->setup_constants();
-
-				self::$instance->includes();
-				self::$instance->admin  = new DWP_Admin();
-				self::$instance->route = new DWP_Settings_Rest_Route();
-			}
-			return self::$instance;
-		}
-
-		private function includes() {
-			require_once DWP_PLUGIN_DIR . 'includes/class-dwp-admin.php';
-			require_once DWP_PLUGIN_DIR . 'includes/class-create-settings-routes.php';
-		}
-
-		private function setup_constants() {
-
-			// Plugin version.
-			if( ! defined( 'DWP_VERSION' ) ){
-				define( 'DWP_VERSION', '1.0.0' );
-			}
-
-			// Plugin basename.
-			if( ! defined( 'DWP_PLUGIN_BASENAME' ) ){
-				define( 'DWP_PLUGIN_BASENAME', plugin_basename(__FILE__) );
-			}
-
-			// Plugin folder Path.
-			if( ! defined( 'DWP_PLUGIN_DIR' ) ){
-				define( 'DWP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-			}
-
-			// Plugin folder URL.
-			if( ! defined( 'DWP_PLUGIN_URL' ) ){
-				define( 'DWP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-			}
-
-			// Plugin root file.
-			if( ! defined( 'DWP_PLUGIN_FILE' ) ){
-				define( 'DWP_PLUGIN_FILE', __FILE__ );
-			}
-
-			// Options
-			if( ! defined( 'DWP_OPTIONS' ) ){
-				define( 'DWP_OPTIONS', 'wooazon_options' );
-			}
-
-		}
-
-		/**
-		 * Setup Hooks
-		 */
-		public function setup_actions() {
-
-			add_action( 'admin_init', array( $this, 'check_required_plugin' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
-			add_action( 'admin_menu', array( $this, 'register_admin_menus' ) );
-
-		}
-
-	}
-
-	function run_dwp() {
-		return DeleteWooProducts::instance();
-	}
-
-	$GLOBALS['dwp'] = run_dwp();
-}
+// Check PHP Version and print notice if minimum not reached, otherwise start the plugin core
+require_once DAP_INC .
+    'base/others/' .
+    (version_compare(phpversion(), DAP_MIN_PHP, '>=') ? 'start.php' : 'fallback-php-version.php');

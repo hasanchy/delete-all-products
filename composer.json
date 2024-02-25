@@ -15,15 +15,14 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "DWP\\": [
-                "inc/",
-                "src/inc/"
+            "DAP\\": [
+                "inc/"
             ]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DWP\\Test\\": [
+            "DAP\\Test\\": [
                 "test/phpunit/"
             ]
         }

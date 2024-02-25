@@ -1,6 +1,6 @@
 describe('The Home Page', () => {
 	it('successfully loads', () => {
-		cy.visit('/edit.php?post_type=product&page=dwp-page') // change URL to match your dev URL
+		cy.visit('/edit.php?post_type=product&page=delete-all-products-component') // change URL to match your dev URL
 
 		cy.get('input[name=log]').type(' admin')
 

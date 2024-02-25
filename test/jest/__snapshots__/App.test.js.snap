@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`changes the class when hovered 1`] = `
+<div
+  className="wrap"
+>
+  <h1
+    style={
+      {
+        "fontSize": "30px",
+      }
+    }
+  >
+    <span
+      style={
+        {
+          "color": "#674399",
+        }
+      }
+    >
+      Delete WooCommerce Products
+    </span>
+  </h1>
+  <div>
+    Something went wrong
+  </div>
+</div>
+`;

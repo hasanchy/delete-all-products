@@ -1,0 +1,42 @@
+{
+	"name": "react-webpack",
+	"version": "1.0.0",
+	"description": "In this Article we will learn how to create a React App with Webpack 5.",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest",
+		"build": "wp-scripts build",
+		"start": "wp-scripts start --hot",
+		"cypress:open": "cypress open"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://hasanchy@github.com/hasanchy/react-webpack.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/hasanchy/react-webpack/issues"
+	},
+	"homepage": "https://github.com/hasanchy/react-webpack#readme",
+	"dependencies": {
+		"@reduxjs/toolkit": "^1.9.5",
+		"@types/react-dom": "^18.2.4",
+		"axios": "^1.3.2",
+		"react-error-boundary": "^4.0.9",
+		"react-redux": "^8.0.5"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "^7.22.4",
+		"@babel/preset-react": "^7.22.3",
+		"@babel/preset-typescript": "^7.21.5",
+		"@wordpress/scripts": "^25.3.0",
+		"babel-jest": "^29.5.0",
+		"cypress": "^12.13.0",
+		"jest": "^29.5.0",
+		"react-test-renderer": "^18.2.0",
+		"ts-loader": "^9.4.2",
+		"typescript": "^5.0.4"
+	}
+}

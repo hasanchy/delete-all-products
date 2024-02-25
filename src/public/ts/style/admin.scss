@@ -1,0 +1,120 @@
+.wooazon-button-primary {
+	background: #674399 !important;
+	border-color: #674399 !important;
+}
+
+.wooazon-button-orange {
+	background: #eda93a !important;
+	border-color: #eda93a !important;
+}
+
+.wooazon-nav-tab-active {
+	border-radius: 4px 4px 0 0;
+	color: #53367c !important;
+}
+
+.wooazon-link {
+	color: #d39634 !important;
+}
+
+.wooazon-button {
+	color: #674399 !important;
+	border-color: #674399 !important;
+}
+
+.wooazon-product-categories {
+	min-height: 42px;
+	max-height: 200px;
+	width: 50%;
+	overflow: auto;
+	padding: 0 0.9em;
+	border: solid 1px #dcdcde;
+	background-color: #fff;
+}
+
+.wooazon-product-categories ul {
+	list-style: none;
+	padding: 0;
+	margin: 14px 0;
+}
+
+.wooazon-product-categories ul ul {
+	margin: 10px 0 0 25px;
+}
+
+.woozonebox-header h2 {
+	font-size: 14px;
+	padding: 8px 12px;
+	margin: 0;
+	line-height: 1.4;
+}
+
+.wooazon-danger {
+	color: red;
+}
+
+.dashicons.spin {
+	animation: dashicons-spin 1s infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes dashicons-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="color"]:focus,
+input[type="date"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="email"]:focus,
+input[type="month"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="time"]:focus,
+input[type="url"]:focus,
+input[type="week"]:focus,
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+select:focus,
+textarea:focus {
+	border-color: #674399 !important;
+	box-shadow: 0 0 0 1px #674399 !important;
+	/* Only visible in Windows High Contrast mode */
+	outline: 2px solid transparent;
+}
+
+button:focus {
+	border-color: #764fad !important;
+	box-shadow: 0 0 0 1px #764fad !important;
+	/* Only visible in Windows High Contrast mode */
+	outline: 2px solid transparent;
+}
+
+button.wooazon-button-orange:focus {
+	border-color: #eda93a !important;
+	box-shadow: 0 0 0 1px #eda93a !important;
+}
+
+table.wooazon-table th {
+	background-color: rgb(241, 243, 246);
+	padding: 15px 15px 15px 10px;
+	text-align: left !important;
+}
+
+table.wooazon-table td {
+	border-bottom: 1px solid rgb(233, 233, 233);
+}
+
+.wooazon-postbox {
+	border-radius: 4px;
+}

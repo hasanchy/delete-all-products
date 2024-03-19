@@ -15,14 +15,14 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "DAP\\": [
+            "DAPRODS\\": [
                 "inc/"
             ]
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DAP\\Test\\": [
+            "DAPRODS\\Test\\": [
                 "test/phpunit/"
             ]
         }

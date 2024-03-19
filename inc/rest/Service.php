@@ -1,5 +1,5 @@
 <?php
-namespace DAP\rest;
+namespace DAPRODS\rest;
 
 use WP_Error;
 use WP_REST_Response;
@@ -22,25 +22,25 @@ class Service
      */
     public function rest_api_init()
     {
-        \register_rest_route( 'dap/v1', '/products/stat', [
+        \register_rest_route( 'daprods/v1', '/products/stat', [
             'methods' => 'GET',
             'callback' => [ $this, 'productsStat' ],
             'permission_callback' => [ $this, 'permission_callback' ]
         ] );
         
-        \register_rest_route( 'dap/v1', '/delete', [
+        \register_rest_route( 'daprods/v1', '/delete', [
             'methods' => 'POST',
             'callback' => [ $this, 'delete_trashed_products_permanently' ],
             'permission_callback' => [ $this, 'permission_callback' ]
         ] );
 
-        \register_rest_route( 'dap/v1', '/trash', [
+        \register_rest_route( 'daprods/v1', '/trash', [
             'methods' => 'POST',
             'callback' => [ $this, 'trash_products' ],
             'permission_callback' => [ $this, 'permission_callback' ]
         ] );
 
-        register_rest_route( 'dap/v1', '/restore', [
+        register_rest_route( 'daprods/v1', '/restore', [
             'methods' => 'POST',
             'callback' => [ $this, 'restore_products' ],
             'permission_callback' => [ $this, 'permission_callback' ]
@@ -101,7 +101,7 @@ class Service
      */
     public function permission_callback()
     {
-        $permit = \DAP\rest\Service::permit();
+        $permit = \DAPRODS\rest\Service::permit();
         return $permit === null ? \true : $permit;
     }
 
@@ -145,10 +145,10 @@ class Service
     public static function permit($cap = 'publish_posts')
     {
         if (!\current_user_can($cap)) {
-            return new WP_Error('rest_dap_forbidden', \__('Forbidden'), ['status' => 403]);
+            return new WP_Error('rest_daprods_forbidden', \__('Forbidden'), ['status' => 403]);
         }
-        if (!\wp_dap_active()) {
-            return new WP_Error('rest_dap_not_activated', \__('Delete WooCommerce Products is not active for the current user.', 'delete-all-products'), ['status' => 500]);
+        if (!\daprods_is_plugin_active()) {
+            return new WP_Error('rest_daprods_not_activated', \__('Delete WooCommerce Products is not active for the current user.', 'delete-all-products'), ['status' => 500]);
         }
         return null;
     }
@@ -158,6 +158,6 @@ class Service
      */
     public static function instance()
     {
-        return new \DAP\rest\Service();
+        return new \DAPRODS\rest\Service();
     }
 }

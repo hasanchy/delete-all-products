@@ -1,6 +1,6 @@
 <?php
 
-namespace DAP\base;
+namespace DAPRODS\base;
 
 \defined('ABSPATH') or die('No script kiddies please!');
 // Avoid direct file request
@@ -9,7 +9,7 @@ namespace DAP\base;
  */
 abstract class Core
 {
-    use \DAP\base\UtilsProvider;
+    use \DAPRODS\base\UtilsProvider;
 
     /**
      * The stored plugin data.
@@ -27,8 +27,8 @@ abstract class Core
     protected function __construct()
     {
         // Define lazy constants
-        \define('DAP_TD', $this->getPluginData('TextDomain'));
-        \define('DAP_VERSION', $this->getPluginData('Version'));
+        \define('DAPRODS_TD', $this->getPluginData('TextDomain'));
+        \define('DAPRODS_VERSION', $this->getPluginData('Version'));
         // $this->construct();
     }
 
@@ -46,7 +46,7 @@ abstract class Core
             require_once ABSPATH . '/wp-admin/includes/plugin.php';
         }
         // @codeCoverageIgnoreEnd
-        $data = isset($this->plugin_data) ? $this->plugin_data : ($this->plugin_data = \get_plugin_data(DAP_FILE, \false, \false));
+        $data = isset($this->plugin_data) ? $this->plugin_data : ($this->plugin_data = \get_plugin_data(DAPRODS_FILE, \false, \false));
         return $key === null ? $data : (isset($data[$key]) ? $data[$key] : null);
     }
 }

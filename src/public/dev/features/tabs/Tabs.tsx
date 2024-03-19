@@ -34,8 +34,8 @@ const Tabs = () => {
 	return (
 		<React.Fragment>
 			<nav className="nav-tab-wrapper">
-				<div className={activeTab === 'all' ? 'nav-tab nav-tab-active dap-nav-tab-active' : 'nav-tab'} style={{ cursor: 'pointer' }} onClick={() => handleActiveTab('all')}><span className="dashicons dashicons-products" style={{ verticalAlign: 'sub' }}></span> All {allProductNumber}</div>
-				<div className={activeTab === 'trash' ? 'nav-tab nav-tab-active dap-nav-tab-active' : 'nav-tab'} style={{ cursor: 'pointer' }} onClick={() => handleActiveTab('trash')}><span className="dashicons dashicons-trash" style={{ verticalAlign: 'sub' }}></span> Trash {trashedProductNumber}</div>
+				<div className={activeTab === 'all' ? 'nav-tab nav-tab-active daprods-nav-tab-active' : 'nav-tab'} style={{ cursor: 'pointer' }} onClick={() => handleActiveTab('all')}><span className="dashicons dashicons-products" style={{ verticalAlign: 'sub' }}></span> All {allProductNumber}</div>
+				<div className={activeTab === 'trash' ? 'nav-tab nav-tab-active daprods-nav-tab-active' : 'nav-tab'} style={{ cursor: 'pointer' }} onClick={() => handleActiveTab('trash')}><span className="dashicons dashicons-trash" style={{ verticalAlign: 'sub' }}></span> Trash {trashedProductNumber}</div>
 			</nav>
 			<div className="tab-content">
 				{renderTabContent()}

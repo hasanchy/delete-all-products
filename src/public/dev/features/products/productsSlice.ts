@@ -36,7 +36,7 @@ const initialState: ProductsState = {
 }
 
 export const fetchProductStat = createAsyncThunk('products/fetchProductStat', async () => {
-	const productStatURL = `${appLocalizer.restUrl}/dap/v1/products/stat`;
+	const productStatURL = `${appLocalizer.restUrl}/daprods/v1/products/stat`;
 	const res = await axios.get(productStatURL, {
 		headers: {
 			'content-type': 'application/json',
@@ -47,7 +47,7 @@ export const fetchProductStat = createAsyncThunk('products/fetchProductStat', as
 });
 
 export const moveProductsToTrash = createAsyncThunk('products/moveProductsToTrash', async () => {
-	const deleteURL = `${appLocalizer.restUrl}/dap/v1/trash`;
+	const deleteURL = `${appLocalizer.restUrl}/daprods/v1/trash`;
 	const res = await axios.post(deleteURL, {}, {
 		headers: {
 			'content-type': 'application/json',
@@ -58,7 +58,7 @@ export const moveProductsToTrash = createAsyncThunk('products/moveProductsToTras
 });
 
 export const restoreTrashedProducts = createAsyncThunk('products/restoreTrashedProducts', async () => {
-	const deleteURL = `${appLocalizer.restUrl}/dap/v1/restore`;
+	const deleteURL = `${appLocalizer.restUrl}/daprods/v1/restore`;
 	const res = await axios.post(deleteURL, {}, {
 		headers: {
 			'content-type': 'application/json',
@@ -69,7 +69,7 @@ export const restoreTrashedProducts = createAsyncThunk('products/restoreTrashedP
 });
 
 export const deleteProductsPermanently = createAsyncThunk('products/deleteProductsPermanently', async () => {
-	const deleteURL = `${appLocalizer.restUrl}/dap/v1/delete`;
+	const deleteURL = `${appLocalizer.restUrl}/daprods/v1/delete`;
 	const res = await axios.post(deleteURL, {}, {
 		headers: {
 			'content-type': 'application/json',

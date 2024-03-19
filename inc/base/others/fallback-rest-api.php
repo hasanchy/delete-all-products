@@ -1,14 +1,14 @@
 <?php
 defined('ABSPATH') or die('No direct access allowed!'); // Avoid direct file request
 
-if (!function_exists('dap_skip_rest_admin_notice')) {
+if (!function_exists('daprods_skip_rest_admin_notice')) {
     /**
      * Show an admin notice to administrators when the minimum WP version
      * could not be reached. The error message is only in english available.
      */
-    function dap_skip_rest_admin_notice() {
+    function daprods_skip_rest_admin_notice() {
         if (current_user_can('activate_plugins')) {
-            $data = get_plugin_data(DAP_FILE, true, false);
+            $data = get_plugin_data(DAPRODS_FILE, true, false);
             global $wp_version;
             echo '<div class=\'notice notice-error\'>
 				<p><strong>' .
@@ -26,4 +26,4 @@ if (!function_exists('dap_skip_rest_admin_notice')) {
         }
     }
 }
-add_action('admin_notices', 'dap_skip_rest_admin_notice');
+add_action('admin_notices', 'daprods_skip_rest_admin_notice');

@@ -1,5 +1,5 @@
 <?php
-namespace DAP\base;
+namespace DAPRODS\base;
 
 \defined('ABSPATH') or die('No direct access allowed!');
 // Avoid direct file request
@@ -22,7 +22,7 @@ trait UtilsProvider
      */
     public function getPluginConstantPrefix()
     {
-        return 'DAP';
+        return 'DAPRODS';
     }
 
     /**
@@ -37,7 +37,7 @@ trait UtilsProvider
          *
          * @var Base
          */
-        return DAP_IS_PRO;
+        return DAPRODS_IS_PRO;
     }
 
     /**
@@ -47,7 +47,7 @@ trait UtilsProvider
      */
     public function getCore()
     {
-        return \call_user_func([DAP_NS . '\\Core', 'getInstance']);
+        return \call_user_func([DAPRODS_NS . '\\Core', 'getInstance']);
     }
 
 }

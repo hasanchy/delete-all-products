@@ -1,9 +1,9 @@
 <?php
-namespace DAP;
+namespace DAPRODS;
 
-use DAP\base\Core as BaseCore;
-use DAP\rest\Service;
-use DAP\view\ConfigPage;
+use DAPRODS\base\Core as BaseCore;
+use DAPRODS\rest\Service;
+use DAPRODS\view\ConfigPage;
 
 \defined('ABSPATH') or die('No direct access allowed!'); // Avoid direct file request
 
@@ -45,7 +45,7 @@ class Core extends BaseCore {
 
 		// Load no-namespace API functions
         foreach (['general'] as $apiInclude) {
-            require_once DAP_INC . 'api/' . $apiInclude . '.php';
+            require_once DAPRODS_INC . 'api/' . $apiInclude . '.php';
         }
 
 		add_action('init', [$this, 'init'], 2);
@@ -63,7 +63,7 @@ class Core extends BaseCore {
 		\add_action('admin_enqueue_scripts', [$this->getAssets(), 'admin_enqueue_scripts']);
 		\add_action('admin_init', [$this, 'check_required_plugin']);
 		\add_action('admin_menu', [$this->getConfigPage(), 'admin_menu']);
-		\add_filter('plugin_action_links_' . \plugin_basename(DAP_FILE), [$this->getConfigPage(), 'plugin_action_links'], 10, 2);
+		\add_filter('plugin_action_links_' . \plugin_basename(DAPRODS_FILE), [$this->getConfigPage(), 'plugin_action_links'], 10, 2);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class Core extends BaseCore {
      */
     public static function getInstance()
     {
-        return !isset(self::$me) ? self::$me = new \DAP\Core() : self::$me;
+        return !isset(self::$me) ? self::$me = new \DAPRODS\Core() : self::$me;
     }
 
 	/**
@@ -92,7 +92,7 @@ class Core extends BaseCore {
 	public function check_required_plugin() {
 		// check if woocommerce is installed.
 		if ( ! class_exists( 'WooCommerce' ) ) {
-			require_once \DAP_INC . 'base/others/fallback-woocommerce.php';
+			require_once \DAPRODS_INC . 'base/others/fallback-woocommerce.php';
 		}
 	}
 

@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'DAP\\' => array($baseDir . '/inc'),
+    'DAPRODS\\' => array($baseDir . '/inc'),
 );

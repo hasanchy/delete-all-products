@@ -1,9 +1,9 @@
 <?php
 
-namespace DAP\view;
+namespace DAPRODS\view;
 
-use DAP\base\UtilsProvider;
-use DAP\Core;
+use DAPRODS\base\UtilsProvider;
+use DAPRODS\Core;
 
 \defined('ABSPATH') or die('No direct access allowed!');
 // Avoid direct file request
@@ -13,7 +13,7 @@ use DAP\Core;
 class ConfigPage
 {
     use UtilsProvider;
-    const COMPONENT_ID = DAP_SLUG . '-component';
+    const COMPONENT_ID = DAPRODS_SLUG . '-component';
 
     /**
      * Constructor.
@@ -64,6 +64,6 @@ class ConfigPage
      */
     public static function instance()
     {
-        return new \DAP\view\ConfigPage();
+        return new \DAPRODS\view\ConfigPage();
     }
 }

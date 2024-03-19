@@ -1,5 +1,5 @@
 <?php
-namespace DAP;
+namespace DAPRODS;
 
 // @codeCoverageIgnoreStart
 \defined('ABSPATH') or die('No direct access allowed!');
@@ -118,9 +118,9 @@ class Assets
             }
             $useSrc = \is_array($s) ? $s[1] : $s;
             $publicSrc = $publicFolder . $useSrc;
-            $path = \trailingslashit(DAP_PATH) . $publicSrc;
+            $path = \trailingslashit(DAPRODS_PATH) . $publicSrc;
             if (\file_exists($path)) {
-                $url = \plugins_url($publicSrc, DAP_FILE);
+                $url = \plugins_url($publicSrc, DAPRODS_FILE);
                 // In dev environment, the cachebuster is not created; it is only created at build time
                 $cachebuster = $this->getCachebusterVersion($publicSrc);
                 
@@ -158,8 +158,8 @@ class Assets
      */
     public function getCachebusterVersion($src, $isLib = \false, $default = null)
     {
-        $default = $default ?? DAP_VERSION;
-        $path = DAP_INC . '/base/others/';
+        $default = $default ?? DAPRODS_VERSION;
+        $path = DAPRODS_INC . '/base/others/';
         $path = $path . 'cachebuster.php';
         
         // Main cachebuster

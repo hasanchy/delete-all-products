@@ -44,8 +44,8 @@ const TrashedProducts = () => {
 			let productText = trashedProducts > 1 ? 'products' : 'product';
 			return <p>
 				<p>{trashedProducts} {productText} found in the trash</p>
-				<button className="button-primary dap-button-danger" onClick={confirmDelete}>Delete Permanently</button>
-				<button className="button-primary dap-button-primary" style={{ marginLeft: '10px' }} onClick={confirmRestore} disabled={isProductsRestoring}>{restoreButtonLabel}</button>
+				<button className="button-primary daprods-button-danger" onClick={confirmDelete}>Delete Permanently</button>
+				<button className="button-primary daprods-button-primary" style={{ marginLeft: '10px' }} onClick={confirmRestore} disabled={isProductsRestoring}>{restoreButtonLabel}</button>
 			</p>
 		} else if (!isProductStatLoading) {
 			return <p>No products found in the trash</p>;

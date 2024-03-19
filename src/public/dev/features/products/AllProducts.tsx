@@ -30,7 +30,7 @@ const AllProducts = () => {
 			let productText = allProducts > 1 ? 'products' : 'product';
 			return <p>
 				<p>{allProducts} {productText} found</p>
-				<button className="button-primary dap-button-primary" style={{ marginLeft: '10px' }} onClick={confirmTrash} disabled={isProductsMovingToTrash}>{trashButtonLabel}</button>
+				<button className="button-primary daprods-button-primary" style={{ marginLeft: '10px' }} onClick={confirmTrash} disabled={isProductsMovingToTrash}>{trashButtonLabel}</button>
 			</p>
 		} else if (!isProductStatLoading) {
 			return <p>No products found</p>;

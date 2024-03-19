@@ -1,12 +1,12 @@
 <?php
-use DAP\Core;
+use DAPRODS\Core;
 
 // We have now ensured that we are running the minimum PHP version.
 \defined('ABSPATH') or die('No direct access allowed!'); // Avoid direct file request
 
 // Check minimum WordPress version
 global $wp_version;
-if (\version_compare($wp_version, \DAP_MIN_WP, '>=')) {
+if (\version_compare($wp_version, \DAPRODS_MIN_WP, '>=')) {
     $load_core = \false;
     // Check minimum WordPress REST API
     if (\version_compare($wp_version, '4.7.0', '>=')) {
@@ -20,17 +20,17 @@ if (\version_compare($wp_version, \DAP_MIN_WP, '>=')) {
     // Load core
     if ($load_core) {
         // Composer autoload
-        $composer_autoload_path = \DAP_PATH . '/vendor/autoload.php';
+        $composer_autoload_path = \DAPRODS_PATH . '/vendor/autoload.php';
         if (\file_exists($composer_autoload_path)) {
             require_once $composer_autoload_path;
         }
         Core::getInstance();
     } else {
         // WP REST API version not reached
-        require_once \DAP_INC . 'base/others/fallback-rest-api.php';
+        require_once \DAPRODS_INC . 'base/others/fallback-rest-api.php';
     }
 
 } else {
     // Min WP version not reached
-    require_once \DAP_INC . 'base/others/fallback-wp-version.php';
+    require_once \DAPRODS_INC . 'base/others/fallback-wp-version.php';
 }

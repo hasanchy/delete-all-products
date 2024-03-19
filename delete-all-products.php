@@ -21,23 +21,23 @@ defined('ABSPATH') or die('No direct access allowed!'); // Avoid direct file req
  * Plugin constants. This file is procedural coding style for initialization of
  * the plugin core and definition of plugin configuration.
  */
-if (defined('DAP_PATH')) {
+if (defined('DAPRODS_PATH')) {
     require_once dirname(__FILE__) . '/inc/base/others/fallback-already.php';
     return;
 }
 
-define('DAP_FILE', __FILE__);
-define('DAP_PATH', dirname(DAP_FILE));
-define('DAP_SLUG', basename(DAP_PATH));
-define('DAP_INC', DAP_PATH . '/inc/');
-define('DAP_MIN_PHP', '7.2.0'); // Minimum of PHP 7.2 required for autoloading and namespacing
-define('DAP_MIN_WP', '5.2.0'); // Minimum of WordPress 5.0 required
-define('DAP_NS', 'DAP');
-define('DAP_IS_PRO', false);
-define('DAP_SLUG_LITE', 'delete-wordpress-products');
-define('DAP_SLUG_PRO', 'delete-wordpress-products-pro');
+define('DAPRODS_FILE', __FILE__);
+define('DAPRODS_PATH', dirname(DAPRODS_FILE));
+define('DAPRODS_SLUG', basename(DAPRODS_PATH));
+define('DAPRODS_INC', DAPRODS_PATH . '/inc/');
+define('DAPRODS_MIN_PHP', '7.2.0'); // Minimum of PHP 7.2 required for autoloading and namespacing
+define('DAPRODS_MIN_WP', '5.2.0'); // Minimum of WordPress 5.0 required
+define('DAPRODS_NS', 'DAPRODS');
+define('DAPRODS_IS_PRO', false);
+define('DAPRODS_SLUG_LITE', 'delete-all-products');
+define('DAPRODS_SLUG_PRO', 'delete-all-products-pro');
 
 // Check PHP Version and print notice if minimum not reached, otherwise start the plugin core
-require_once DAP_INC .
+require_once DAPRODS_INC .
     'base/others/' .
-    (version_compare(phpversion(), DAP_MIN_PHP, '>=') ? 'start.php' : 'fallback-php-version.php');
+    (version_compare(phpversion(), DAPRODS_MIN_PHP, '>=') ? 'start.php' : 'fallback-php-version.php');

@@ -1,6 +1,6 @@
 {
 	"name": "delete-all-products",
-	"version": "1.0.0",
+	"version": "1.0.4",
 	"description": "Effortlessly manage your WooCommerce store with the Delete All Products plugin, allowing you to efficiently delete all products in just few clicks.",
 	"main": "index.js",
 	"scripts": {

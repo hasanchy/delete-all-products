@@ -30,7 +30,7 @@ If you want to contribute to this project or just report a bug, you are more tha
 == Installation ==
 1. Go to your WordPress backend
 2. Navigate to "Plugins" > "Add New"
-3. Search for "Real Category Management"
+3. Search for "Delete All Products"
 4. Install and activate the plugin
 5. Navigate to "Products" > "Delete Products"
 

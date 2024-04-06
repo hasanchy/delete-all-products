@@ -1,6 +1,6 @@
 === Delete All Products ===
 Contributors: themedyno
-Tags: delete woocommerce products, delete products
+Tags: delete products
 Requires at least: 5.2
 Tested up to: 6.4.2
 Requires PHP: 7.2.0
@@ -24,7 +24,12 @@ Key Features:
 
 Optimize your WooCommerce store management experience by integrating the Delete WooCommerce Products plugin, a valuable tool for maintaining a clean and organized product catalog. Upgrade your efficiency and focus on what matters most – delivering an exceptional shopping experience for your customers.
 
-== CONTRIBUTE ==
+== Screenshots ==
+1. All Products Tab
+2. Trash Confirmation
+3. Trash Products Tab
+
+== Contribute ==
 If you want to contribute to this project or just report a bug, you are more than welcome. Please check repository from <a href="https://github.com/ThemeDyno/delete-all-products">Github</a>.
 
 == Installation ==

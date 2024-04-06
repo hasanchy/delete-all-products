@@ -5,7 +5,7 @@
  * @wordpress-plugin
  * Plugin Name:     Delete All Products
  * Description:     Efficiently delete all WooCommerce products in just a few clicks
- * Author:          Themedyno
+ * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
  * Version:         1.0.4
  * Text Domain:     delete-all-products

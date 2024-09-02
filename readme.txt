@@ -1,4 +1,4 @@
-=== Delete All Products ===
+=== Delete All Products for WooCommerce ===
 Contributors: hasanchowdhury, themedyno 
 Tags: delete products
 Requires at least: 5.2
@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 Efficiently delete all WooCommerce products in just a few clicks, with the option to either move items to the trash or delete them permanently.
 
 == Description ==
-Effortlessly manage your WooCommerce store with the Delete All Products plugin, allowing you to efficiently delete all products in just one click. Streamline your store setup and testing processes by swiftly removing sample product data with the option to either move items to the trash or delete them permanently.
+Effortlessly manage your WooCommerce store with the Delete All Products for WooCommerce plugin, allowing you to efficiently delete all products in just one click. Streamline your store setup and testing processes by swiftly removing sample product data with the option to either move items to the trash or delete them permanently.
 
 This essential plugin simplifies the task of bulk product deletion, enhancing the efficiency of your WooCommerce store management. Seamlessly organize your product inventory by choosing to move products to the trash for future retrieval, providing a comprehensive solution for maintaining a clutter-free and well-maintained online store.
 
@@ -35,7 +35,7 @@ If you want to contribute to this project or just report a bug, you are more tha
 == Installation ==
 1. Go to your WordPress backend
 2. Navigate to "Plugins" > "Add New"
-3. Search for "Delete All Products"
+3. Search for "Delete All Products for WooCommerce"
 4. Install and activate the plugin
 5. Navigate to "Products" > "Delete Products"
 

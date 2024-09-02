@@ -3,7 +3,7 @@
  * Main file for WordPress.
  * 
  * @wordpress-plugin
- * Plugin Name:     Delete All Products
+ * Plugin Name:     Delete All Products for WooCommerce
  * Description:     Efficiently delete all WooCommerce products in just a few clicks
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/

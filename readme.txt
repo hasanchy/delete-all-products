@@ -1,5 +1,5 @@
 === Delete All Products ===
-Contributors: themedyno
+Contributors: hasanchowdhury, themedyno 
 Tags: delete products
 Requires at least: 5.2
 Tested up to: 6.4.2
@@ -30,7 +30,7 @@ Optimize your WooCommerce store management experience by integrating the Delete 
 3. Trash Products Tab
 
 == Contribute ==
-If you want to contribute to this project or just report a bug, you are more than welcome. Please check repository from <a href="https://github.com/ThemeDyno/delete-all-products">Github</a>.
+If you want to contribute to this project or just report a bug, you are more than welcome. Please check repository from <a href="https://github.com/hasanchy/delete-all-products">Github</a>.
 
 == Installation ==
 1. Go to your WordPress backend

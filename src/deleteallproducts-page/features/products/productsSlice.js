@@ -1,20 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchProductsStat, trashProducts } from '../../services/apiService';
+import { deleteProducts, fetchProductsStat, restoreProducts, trashProducts } from '../../services/apiService';
 
 const initialState = {
 	productsScreen: 'default',
 	isProductsStatLoading: false,
-	isProductsTrashing: false,
-	allProducts: 0,
-	trashedProducts: 0
+	isTrashingInProgress: false,
+	isRestoringInProgress: false,
+	isDeletingInProgress: false,
+	productsAll: 0,
+	productsTrash: 0
 }
 
 export const productsSlice = createSlice({
 	name: 'products',
 	initialState,
 	reducers: {
-		setIsProductsTrashing: (state, action) => {
-			state.isProductsTrashing = action.payload
+		setIsTrashingInProgress: (state, action) => {
+			state.isTrashingInProgress = action.payload
+		},
+		setIsRestoringInProgress: (state, action) => {
+			state.isRestoringInProgress = action.payload
+		},
+		setIsDeletingInProgress: (state, action) => {
+			state.isDeletingInProgress = action.payload
 		}
 	},
 	extraReducers: (builder) => {
@@ -23,27 +31,47 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(fetchProductsStat.fulfilled, (state, action) => {
             state.isProductsStatLoading = false;
-			state.allProducts = action.payload.total;
-			state.trashedProducts = action.payload.trash;
+			state.productsAll = action.payload.all;
+			state.productsTrash = action.payload.trash;
 		}),
 		builder.addCase(fetchProductsStat.rejected, (state, action) => {
 			state.isProductsStatLoading = false;
-			// state.amazonApiConnectionStatus = 'error';
-			// state.amazonApiConnectionMessage = action.payload?.message ? action.payload.message : 'Unable to connect to the API.';
         }),
         builder.addCase(trashProducts.pending, (state) => {
-			state.isProductsTrashing = true;
+			state.isTrashingInProgress = true;
 		}),
 		builder.addCase(trashProducts.fulfilled, (state, action) => {
-            state.isProductsTrashing = false;
-			state.allProducts = action.payload.stat.total;
-			state.trashedProducts = action.payload.stat.trash;
+            state.isTrashingInProgress = false;
+			state.productsAll = action.payload.stat.all;
+			state.productsTrash = action.payload.stat.trash;
 		}),
 		builder.addCase(trashProducts.rejected, (state, action) => {
-			state.isProductsTrashing = false;
+			state.isTrashingInProgress = false;
+		}),
+        builder.addCase(restoreProducts.pending, (state) => {
+			state.isRestoringInProgress = true;
+		}),
+		builder.addCase(restoreProducts.fulfilled, (state, action) => {
+            state.isRestoringInProgress = false;
+			state.productsAll = action.payload.stat.all;
+			state.productsTrash = action.payload.stat.trash;
+		}),
+		builder.addCase(restoreProducts.rejected, (state, action) => {
+			state.isRestoringInProgress = false;
+		}),
+        builder.addCase(deleteProducts.pending, (state) => {
+			state.isDeletingInProgress = true;
+		}),
+		builder.addCase(deleteProducts.fulfilled, (state, action) => {
+            state.isDeletingInProgress = false;
+			state.productsAll = action.payload.stat.all;
+			state.productsTrash = action.payload.stat.trash;
+		}),
+		builder.addCase(deleteProducts.rejected, (state, action) => {
+			state.isDeletingInProgress = false;
 		})
 	}
 })
 
-export const { setIsProductsTrashing } = productsSlice.actions
+export const { setIsTrashingInProgress } = productsSlice.actions
 export default productsSlice.reducer;

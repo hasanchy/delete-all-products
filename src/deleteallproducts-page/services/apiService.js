@@ -16,7 +16,7 @@ export const fetchProductsStat = createAsyncThunk('products/stat', async (params
 	}
 });
 
-export const trashProducts = createAsyncThunk('productsTrash', async (params, { rejectWithValue }) => {
+export const trashProducts = createAsyncThunk('products/trash', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.delete(daprodsDeleteAllProducts.restEndpoint.productsTrash, {
 			params,
@@ -31,10 +31,24 @@ export const trashProducts = createAsyncThunk('productsTrash', async (params, { 
 	}
 });
 
-export const deleteProducts = createAsyncThunk('productsDelete', async (params, { rejectWithValue }) => {
+export const deleteProducts = createAsyncThunk('products/delete', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.delete(daprodsDeleteAllProducts.restEndpoint.productsDelete, {
 			params,
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': daprodsDeleteAllProducts.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
+export const restoreProducts = createAsyncThunk('products/restore', async ({ rejectWithValue }) => {
+	try{
+		const res = await axios.post(daprodsDeleteAllProducts.restEndpoint.productsRestore, {}, {
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': daprodsDeleteAllProducts.restNonce

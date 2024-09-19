@@ -148,10 +148,10 @@ class AffiliateProductsImporter extends Base {
 			'localize'  => array(
 				'dom_element_id' => $this->unique_id,
 				'restEndpoint'   => array(
-					'productsStat'        => home_url( '/wp-json' ) . '/delete-all-products/v1/products/stat',
-					'productsTrash'       => home_url( '/wp-json' ) . '/delete-all-products/v1/products/trash',
-					'productsDelete'      => home_url( '/wp-json' ) . '/delete-all-products/v1/products/delete',
-					'productsRestore'     => home_url( '/wp-json' ) . '/delete-all-products/v1/products/restore',
+					'productsStat'        => rest_url() . 'delete-all-products/v1/products/stat',
+					'productsTrash'       => rest_url() . 'delete-all-products/v1/products/trash',
+					'productsDelete'      => rest_url() . 'delete-all-products/v1/products/delete',
+					'productsRestore'     => rest_url() . 'delete-all-products/v1/products/restore',
 				),
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),

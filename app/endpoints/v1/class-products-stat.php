@@ -62,7 +62,7 @@ class ProductsStat extends Endpoint {
             'posts_per_page' => -1, // Retrieve all products
         );
 		$products = get_posts( $args );
-		$products_total = count($products);
+		$products_all = count($products);
 
         $args = array(
             'post_type'   => 'product',
@@ -75,7 +75,7 @@ class ProductsStat extends Endpoint {
 
 		// Prepare response
 		$response = array(
-			'total' => $products_total,
+			'all' => $products_all,
 			'trash'    => $trashed_products_count
 		);
 

@@ -10,11 +10,11 @@ import TrashedProducts from '../../features/products/TrashedProducts';
 const MenuTabs = () => {
 
 	const { activeTab  } = useSelector((state) => state.menuTabs);
-	const { isProductsStatLoading, allProducts, trashedProducts } = useSelector((state) => state.products);
+	const { isProductsStatLoading, productsAll, productsTrash } = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 
-	let allLabel = ( isProductsStatLoading ) ? <>All <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `All (${allProducts})`;
-	let trashLabel = ( isProductsStatLoading ) ? <>Trash <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `Trash (${trashedProducts})`;
+	let allLabel = ( isProductsStatLoading ) ? <>All <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `All (${productsAll})`;
+	let trashLabel = ( isProductsStatLoading ) ? <>Trash <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `Trash (${productsTrash})`;
 	const tabItems = [
 		{
 			key: 'all',

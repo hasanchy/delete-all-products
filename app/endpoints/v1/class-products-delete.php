@@ -14,7 +14,7 @@ use WP_REST_Request;
 use WP_REST_Response;
 use WP_Query;
 
-class ProductsTrash extends Endpoint {
+class ProductsDelete extends Endpoint {
 	/**
 	 * API endpoint for the current endpoint.
 	 *
@@ -22,7 +22,7 @@ class ProductsTrash extends Endpoint {
 	 *
 	 * @var string
 	 */
-	protected $endpoint = 'products/trash';
+	protected $endpoint = 'products/delete';
 
 	/**
 	 * Register the routes for handling products functionality.
@@ -37,14 +37,7 @@ class ProductsTrash extends Endpoint {
 			array(
 				array(
 					'methods'             => 'DELETE',
-					'args'                => array(
-						'limit'     => array(
-							'required' => true,
-							'type'     => 'number',
-							'default'  => 10,
-						),
-					),
-					'callback'            => array( $this, 'trash_products' ),
+					'callback'            => array( $this, 'delete_products' ),
 					'permission_callback' => array( $this, 'edit_permission' ),
 				),
 			)
@@ -58,31 +51,29 @@ class ProductsTrash extends Endpoint {
 	 * @return WP_REST_Response|WP_Error
 	 * @since 1.0.0
 	 */
-	public function trash_products( WP_REST_Request $request ) {
+	public function delete_products( WP_REST_Request $request ) {
 		$nonce = $request->get_header( 'X-WP-NONCE' );
 		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		// Get and sanitize request parameters
-		$limit = (int) $request->get_param( 'limit' ) ? (int) $request->get_param( 'limit' ) : 10;
-
 		$args = array(
 			'post_type' => 'product',
-			'posts_per_page' => $limit,
+			'post_status' => 'trash',
+			'posts_per_page' => 10,
 		);
 		$posts = get_posts( $args );
 
-		$total_trashed = 0;
+		$total_deleted = 0;
 		foreach ($posts as $post) {
 			$product = wc_get_product($post->ID);
-			$product->delete(false);
-			$total_trashed++;
+			$product->delete(true);
+			$total_deleted++;
 		}
 
 		// Prepare response
 		$response = array(
-			'total_trashed'    => $total_trashed,
+			'total_deleted'    => $total_deleted,
 			'stat'			   => $this->get_product_stat()
 		);
 

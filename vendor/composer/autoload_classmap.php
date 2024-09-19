@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DAPRODS\\App\\Admin_Pages\\AffiliateProductsImporter' => $baseDir . '/app/admin-pages/class-affiliate-products-importer.php',
+    'DAPRODS\\App\\Endpoints\\V1\\ProductsDelete' => $baseDir . '/app/endpoints/v1/class-products-delete.php',
+    'DAPRODS\\App\\Endpoints\\V1\\ProductsRestore' => $baseDir . '/app/endpoints/v1/class-products-restore.php',
     'DAPRODS\\App\\Endpoints\\V1\\ProductsStat' => $baseDir . '/app/endpoints/v1/class-products-stat.php',
     'DAPRODS\\App\\Endpoints\\V1\\ProductsTrash' => $baseDir . '/app/endpoints/v1/class-products-trash.php',
     'DAPRODS\\Core\\Base' => $baseDir . '/core/class-base.php',

@@ -12,7 +12,6 @@ use DAPRODS\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
-use WP_Query;
 
 class ProductsStat extends Endpoint {
 	/**
@@ -57,29 +56,29 @@ class ProductsStat extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$args = array(
-            'post_type'   => 'product',
-            'posts_per_page' => -1, // Retrieve all products
-        );
-		$products = get_posts( $args );
-		$products_all = count($products);
+		$args         = array(
+			'post_type'      => 'product',
+			'post_status'    => array( 'publish', 'pending', 'draft', 'private' ),
+			'posts_per_page' => -1, // Retrieve all products
+		);
+		$products     = get_posts( $args );
+		$products_all = count( $products );
 
-        $args = array(
-            'post_type'   => 'product',
-            'post_status' => 'trash',
-            'posts_per_page' => -1, // Retrieve all trashed products
-        );
-        
-        $trashed_products = get_posts( $args );
-        $trashed_products_count = count($trashed_products);
+		$args = array(
+			'post_type'      => 'product',
+			'post_status'    => 'trash',
+			'posts_per_page' => -1, // Retrieve all trashed products
+		);
+
+		$trashed_products       = get_posts( $args );
+		$trashed_products_count = count( $trashed_products );
 
 		// Prepare response
 		$response = array(
-			'all' => $products_all,
-			'trash'    => $trashed_products_count
+			'all'   => $products_all,
+			'trash' => $trashed_products_count,
 		);
 
 		return new WP_REST_Response( $response );
 	}
-
 }

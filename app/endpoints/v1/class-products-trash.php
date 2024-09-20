@@ -12,7 +12,6 @@ use DAPRODS\Core\Endpoint;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
-use WP_Query;
 
 class ProductsTrash extends Endpoint {
 	/**
@@ -37,13 +36,6 @@ class ProductsTrash extends Endpoint {
 			array(
 				array(
 					'methods'             => 'DELETE',
-					'args'                => array(
-						'limit'     => array(
-							'required' => true,
-							'type'     => 'number',
-							'default'  => 10,
-						),
-					),
 					'callback'            => array( $this, 'trash_products' ),
 					'permission_callback' => array( $this, 'edit_permission' ),
 				),
@@ -64,52 +56,51 @@ class ProductsTrash extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		// Get and sanitize request parameters
-		$limit = (int) $request->get_param( 'limit' ) ? (int) $request->get_param( 'limit' ) : 10;
-
-		$args = array(
-			'post_type' => 'product',
-			'posts_per_page' => $limit,
+		$args  = array(
+			'post_type'      => 'product',
+			'post_status'    => array( 'publish', 'pending', 'draft', 'private' ),
+			'posts_per_page' => 10,
 		);
 		$posts = get_posts( $args );
 
 		$total_trashed = 0;
-		foreach ($posts as $post) {
-			$product = wc_get_product($post->ID);
-			$product->delete(false);
-			$total_trashed++;
+		foreach ( $posts as $post ) {
+			$product = wc_get_product( $post->ID );
+			$product->delete( false );
+			++$total_trashed;
 		}
 
 		// Prepare response
 		$response = array(
-			'total_trashed'    => $total_trashed,
-			'stat'			   => $this->get_product_stat()
+			'total_trashed' => $total_trashed,
+			'stat'          => $this->get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );
 	}
 
-	public function get_product_stat(){
-		$args = array(
-            'post_type'   => 'product',
-            'posts_per_page' => -1, // Retrieve all products
-        );
-		$products = get_posts( $args );
-		$products_all = count($products);
+	public function get_product_stat() {
+		$args         = array(
+			'post_type'      => 'product',
+			'post_status'    => array( 'publish', 'pending', 'draft', 'private' ),
+			'posts_per_page' => -1, // Retrieve all products
+		);
+		$products     = get_posts( $args );
+		$products_all = count( $products );
 
-        $args = array(
-            'post_type'   => 'product',
-            'post_status' => 'trash',
-            'posts_per_page' => -1, // Retrieve all trashed products
-        );
-        
-        $trashed_products = get_posts( $args );
-        $trashed_products_count = count($trashed_products);
+		$args = array(
+			'post_type'      => 'product',
+			'post_status'    => 'trash',
+			'posts_per_page' => -1, // Retrieve all trashed products
+		);
+
+		$trashed_products       = get_posts( $args );
+		$trashed_products_count = count( $trashed_products );
 
 		// Prepare response
 		return array(
-			'all' => $products_all,
-			'trash'    => $trashed_products_count
+			'all'   => $products_all,
+			'trash' => $trashed_products_count,
 		);
 	}
 }

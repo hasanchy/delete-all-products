@@ -94,14 +94,13 @@ class AffiliateProductsImporter extends Base {
 
 
 	public function register_admin_page() {
-		$page = add_menu_page(
+		$page = add_submenu_page(
+			'edit.php?post_type=product', // Parent slug for WooCommerce Products menu
 			$this->page_title,
 			__( 'Delete All Products', 'delete-all-products' ),
 			'manage_options',
 			$this->page_slug,
-			array( $this, 'callback' ),
-			$this->getIcon(),
-			26
+			array( $this, 'callback' )
 		);
 
 		add_action( 'load-' . $page, array( $this, 'prepare_assets' ) );
@@ -148,10 +147,10 @@ class AffiliateProductsImporter extends Base {
 			'localize'  => array(
 				'dom_element_id' => $this->unique_id,
 				'restEndpoint'   => array(
-					'productsStat'        => rest_url() . 'delete-all-products/v1/products/stat',
-					'productsTrash'       => rest_url() . 'delete-all-products/v1/products/trash',
-					'productsDelete'      => rest_url() . 'delete-all-products/v1/products/delete',
-					'productsRestore'     => rest_url() . 'delete-all-products/v1/products/restore',
+					'productsStat'    => rest_url() . 'delete-all-products/v1/products/stat',
+					'productsTrash'   => rest_url() . 'delete-all-products/v1/products/trash',
+					'productsDelete'  => rest_url() . 'delete-all-products/v1/products/delete',
+					'productsRestore' => rest_url() . 'delete-all-products/v1/products/restore',
 				),
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),

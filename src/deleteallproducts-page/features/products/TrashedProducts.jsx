@@ -2,19 +2,22 @@ import React, { useRef, useState } from 'react';
 import { Button, Card, Col, Modal, Progress, Row, Space } from "antd";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
-import { restoreProducts } from '../../services/apiService';
+import { deleteProducts, restoreProducts } from '../../services/apiService';
 import { useDispatch, useSelector } from 'react-redux';
 const { confirm } = Modal;
 
 const TrashedProducts = () => {
 
     const dispatch = useDispatch();
-    const { isProductsStatLoading, isRestoringInProgress, productsTrash } = useSelector((state) => state.products);
+    const { isProductsStatLoading, isRestoringInProgress, isTrashingInProgress, isDeletingInProgress, productsTrash } = useSelector((state) => state.products);
     const DELETE_PRODUCTS_PER_REQUEST = 10;
 
     const [totalProducts, setTotalProducts] = useState(0);
     const [totalRestored, setTotalRestored] = useState(0);
     const [displayRestoringProgressBar, setDisplayRestoringProgressBar] = useState(false);
+    const [totalDeleted, setTotalDeleted] = useState(0);
+    const [displayDeletingProgressBar, setDisplayDeletingProgressBar] = useState(false);
+    const [isCancellingInProgress, setIsCancellingInProgress] = useState(false);
     const [displayStopButton, setDisplayStopButton] = useState(false);
 
     // Use useRef for cancellation state
@@ -49,6 +52,43 @@ const TrashedProducts = () => {
             }
         }
 
+        setDisplayRestoringProgressBar( false );
+        setIsCancellingInProgress( false );
+        setDisplayStopButton( false );
+    };
+
+
+    const handleDeleteAllProducts = async () => {
+
+        let totalDeleted = 0;
+        let totalProducts = productsTrash;
+
+        setTotalDeleted(totalDeleted);
+        setTotalProducts(totalProducts);
+        setDisplayStopButton( true );
+        setDisplayDeletingProgressBar(true);
+        isRestoringCancelled.current = false; // Reset cancellation state before starting
+
+        while (totalDeleted < totalProducts) {
+            if (isRestoringCancelled.current) {
+                break; // Exit the loop if trashing is cancelled
+            }
+
+            try {
+                let response = await dispatch(deleteProducts());
+                totalDeleted += response.payload.total_deleted;
+                totalProducts = totalDeleted + response.payload.stat.trash;
+
+                setTotalDeleted(totalDeleted);
+                setTotalProducts(totalProducts);
+            } catch (error) {
+                console.error('Error trashing products:', error);
+                break; // Exit the loop in case of an error
+            }
+        }
+
+        setDisplayDeletingProgressBar( false );
+        setIsCancellingInProgress( false );
         setDisplayStopButton( false );
     };
 
@@ -56,13 +96,13 @@ const TrashedProducts = () => {
         confirm({
             title: 'Delete Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: 'Do you want to delete all the trashed products permanently?',
+            content: 'Are you sure you want to permanently delete all the trashed products?',
             okText: 'Yes',
             okButtonProps: {
                 danger: true,
             },
             onOk() {
-                console.log('OK');
+                handleDeleteAllProducts();
             },
             cancelText:'No',
             onCancel() {
@@ -77,7 +117,7 @@ const TrashedProducts = () => {
         confirm({
             title: 'Restore Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: 'Do you want to restore all the trashed products?',
+            content: 'Are you sure you want to restore all the trashed products?',
             okText: 'Yes',
             onOk() {
                 handleRestoreAllProducts();
@@ -96,7 +136,7 @@ const TrashedProducts = () => {
             let percent = Math.round((totalRestored / totalProducts) * 100);
             return (
                 <>
-                    <b>{`Restored ${totalRestored} product(s) out of ${totalProducts}`}</b>
+                    <b>{`Restored ${totalRestored} products out of ${totalProducts}`}</b>
                     <Progress
                         percent={percent}
                         status="active"
@@ -112,23 +152,55 @@ const TrashedProducts = () => {
         return null;
     };
 
+    const renderDeleteAllProgress = () => {
+        if (displayDeletingProgressBar) {
+            let percent = Math.round((totalDeleted / totalProducts) * 100);
+            return (
+                <>
+                    <b>{`Deleted ${totalDeleted} products out of ${totalProducts}`}</b>
+                    <Progress
+                        percent={percent}
+                        status="active"
+                        strokeColor={{
+                            from: '#ff4d4f',
+                            to: '#ff4d4f',
+                        }}
+                        showInfo={true}
+                    />
+                </>
+            );
+        }
+        return null;
+    };
+
     const handleStop = () => {
         isRestoringCancelled.current = true; // Set cancellation state to true
-        setDisplayStopButton( false );
+        setIsCancellingInProgress( true );
     };
 
     const renderInfo = () => {
-        if( productsTrash > 0 && !isRestoringInProgress) {
-            return <>{productsTrash} product(s) found in the trash</>
+        if(isProductsStatLoading){
+            return 'Loading...';
+        }else if( productsTrash > 0 && !isRestoringInProgress && !isDeletingInProgress) {
+            return <>{productsTrash} products found in the trash</>
         }else if( !productsTrash && !isRestoringInProgress ){
             return <>No products found in the trash</>
         }
         return null;
     }
 
+    const renderDeleteButton = () => {
+        if( productsTrash > 0 && !isRestoringInProgress) {
+            return <Button type="primary" danger onClick={showDeletePermanentlyConfirm} loading={isDeletingInProgress} disabled={isProductsStatLoading || isTrashingInProgress}>
+                Delete Permanently
+            </Button>
+        }
+        return null;
+    }
+
     const renderRestoreTrashButton = () => {
-        if( productsTrash > 0 ) {
-            return <Button type="primary" onClick={showRestoreTrashConfirm} loading={isRestoringInProgress} disabled={isProductsStatLoading}>
+        if( productsTrash > 0 && !isDeletingInProgress) {
+            return <Button type="primary" onClick={showRestoreTrashConfirm} loading={isRestoringInProgress} disabled={isProductsStatLoading || isTrashingInProgress}>
                 Restore Trash
             </Button>
         }
@@ -137,11 +209,10 @@ const TrashedProducts = () => {
 
     const renderStopButton = () => {
         if( displayStopButton ){
-            return <Button type="default" onClick={handleStop}>
+            return <Button type="default" onClick={handleStop} loading={isCancellingInProgress}>
                 Stop
             </Button>
         }
-
         return null;
     }
 
@@ -150,18 +221,15 @@ const TrashedProducts = () => {
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                 <Row>
                     <Col span={24}>
-                        {/* 7 Products found in the trash */}
                         {renderTrashAllProgress()}
+                        {renderDeleteAllProgress()}
                         {renderInfo()}
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Space>
-                            {/* <Button type="primary" danger onClick={showDeletePermanentlyConfirm} loading={false}>
-                                Delete Permanently
-                            </Button> */}
-
+                            {renderDeleteButton()}
                             {renderRestoreTrashButton()}
                             {renderStopButton()}
                         </Space>

@@ -9,12 +9,12 @@ const { confirm } = Modal;
 const AllProducts = () => {
 
     const dispatch = useDispatch();
-    const { isProductsStatLoading, isProductsTrashing, productsAll, isTrashingInProgress } = useSelector((state) => state.products);
-    const DELETE_PRODUCTS_PER_REQUEST = 10;
+    const { isProductsStatLoading, productsAll, isTrashingInProgress, isRestoringInProgress, isDeletingInProgress } = useSelector((state) => state.products);
 
     const [totalProducts, setTotalProducts] = useState(0);
     const [totalTrashed, setTotalTrashed] = useState(0);
     const [displayTrashingProgressBar, setDisplayTrashingProgressBar] = useState(false);
+    const [isTrashCancellingInProgress, setIsTrashCancellingInProgress] = useState(false);
     const [displayStopButton, setDisplayStopButton] = useState(false);
 
     // Use useRef for cancellation state
@@ -37,7 +37,7 @@ const AllProducts = () => {
             }
 
             try {
-                let response = await dispatch(trashProducts({ limit: DELETE_PRODUCTS_PER_REQUEST }));
+                let response = await dispatch(trashProducts());
                 totalTrashed += response.payload.total_trashed;
                 totalProducts = totalTrashed + response.payload.stat.all;
 
@@ -49,6 +49,8 @@ const AllProducts = () => {
             }
         }
 
+        setDisplayTrashingProgressBar( false );
+        setIsTrashCancellingInProgress( false );
         setDisplayStopButton( false );
     };
 
@@ -56,7 +58,7 @@ const AllProducts = () => {
         confirm({
             title: 'Trash Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: 'Do you want to trash all the products?',
+            content: 'Are you sure you want to move all the products to the trash?',
             okText: 'Yes',
             onOk() {
                 handleTrashAllProducts();
@@ -75,7 +77,7 @@ const AllProducts = () => {
             let percent = Math.round((totalTrashed / totalProducts) * 100);
             return (
                 <>
-                    <b>{`Deleted ${totalTrashed} product(s) out of ${totalProducts}`}</b>
+                    <b>{`Trashed ${totalTrashed} out of ${totalProducts} products.`}</b>
                     <Progress
                         percent={percent}
                         status="active"
@@ -93,21 +95,23 @@ const AllProducts = () => {
 
     const stopMoveToTrash = () => {
         isTrashingCancelled.current = true; // Set cancellation state to true
-        setDisplayStopButton( false );
+        setIsTrashCancellingInProgress( true );
     };
 
     const renderInfo = () => {
-        if( productsAll > 0 && !isTrashingInProgress) {
-            return <>{productsAll} product(s) found</>
+        if(isProductsStatLoading){
+            return 'Loading...';
+        }else if( productsAll > 0 && !isTrashingInProgress) {
+            return <>A total of {productsAll} products were found.</>
         }else if( !productsAll && !isTrashingInProgress ){
-            return <>No products found</>
+            return <>No products were found.</>
         }
         return null;
     }
 
     const renderMoveToTrashButton = () => {
         if( productsAll > 0 ) {
-            return <Button type="primary" onClick={showMoveToTrashConfirm} loading={isProductsTrashing} disabled={isProductsStatLoading}>
+            return <Button type="primary" onClick={showMoveToTrashConfirm} loading={isTrashingInProgress} disabled={isProductsStatLoading || isRestoringInProgress || isDeletingInProgress}>
                 Move To Trash
             </Button>
         }
@@ -116,7 +120,7 @@ const AllProducts = () => {
 
     const renderStopButton = () => {
         if( displayStopButton ){
-            return <Button type="default" onClick={stopMoveToTrash}>
+            return <Button type="default" onClick={stopMoveToTrash} loading={isTrashCancellingInProgress}>
                 Stop
             </Button>
         }

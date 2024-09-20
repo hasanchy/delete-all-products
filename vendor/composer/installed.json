@@ -383,12 +383,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "cc4244b4e6ab34f3e8db83e3987dcb65138450ff"
+                "reference": "dd8f54106f37cd8c6b681d5c659b76a1d309c67f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/cc4244b4e6ab34f3e8db83e3987dcb65138450ff",
-                "reference": "cc4244b4e6ab34f3e8db83e3987dcb65138450ff",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/dd8f54106f37cd8c6b681d5c659b76a1d309c67f",
+                "reference": "dd8f54106f37cd8c6b681d5c659b76a1d309c67f",
                 "shasum": ""
             },
             "require": {
@@ -401,9 +401,9 @@
                 "php-parallel-lint/php-console-highlighter": "^1.0",
                 "php-parallel-lint/php-parallel-lint": "^1.3.2",
                 "phpcsstandards/phpcsdevcs": "^1.1.6",
-                "yoast/phpunit-polyfills": "^1.1.0 || ^2.0.0"
+                "yoast/phpunit-polyfills": "^1.1.0 || ^2.0.0 || ^3.0.0"
             },
-            "time": "2024-08-23T23:59:03+00:00",
+            "time": "2024-09-16T11:24:55+00:00",
             "default-branch": true,
             "type": "phpcodesniffer-standard",
             "extra": {
@@ -475,12 +475,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "f9052410eb9898a3f1780278bb080dfb930b7fe9"
+                "reference": "92c8ef54357ea09d93f8efa043d7c9c0a71ae094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/f9052410eb9898a3f1780278bb080dfb930b7fe9",
-                "reference": "f9052410eb9898a3f1780278bb080dfb930b7fe9",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/92c8ef54357ea09d93f8efa043d7c9c0a71ae094",
+                "reference": "92c8ef54357ea09d93f8efa043d7c9c0a71ae094",
                 "shasum": ""
             },
             "require": {
@@ -492,7 +492,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0 || ^8.0 || ^9.3.4"
             },
-            "time": "2024-09-02T13:22:27+00:00",
+            "time": "2024-09-18T16:46:38+00:00",
             "default-branch": true,
             "bin": [
                 "bin/phpcbf",

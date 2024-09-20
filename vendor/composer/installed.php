@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4483bb0af5c1a49a67ba7f81f3d589437ea113ad',
+        'reference' => '8967f7954485ba2daf293fbdfa56a96a3702e625',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4483bb0af5c1a49a67ba7f81f3d589437ea113ad',
+            'reference' => '8967f7954485ba2daf293fbdfa56a96a3702e625',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -69,7 +69,7 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'cc4244b4e6ab34f3e8db83e3987dcb65138450ff',
+            'reference' => 'dd8f54106f37cd8c6b681d5c659b76a1d309c67f',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(
@@ -80,7 +80,7 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'f9052410eb9898a3f1780278bb080dfb930b7fe9',
+            'reference' => '92c8ef54357ea09d93f8efa043d7c9c0a71ae094',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(

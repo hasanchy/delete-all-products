@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8967f7954485ba2daf293fbdfa56a96a3702e625',
+        'reference' => '2494cf09a4fccb7ed2d5a8ddf306ef1221b4b396',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8967f7954485ba2daf293fbdfa56a96a3702e625',
+            'reference' => '2494cf09a4fccb7ed2d5a8ddf306ef1221b4b396',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -69,7 +69,7 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'dd8f54106f37cd8c6b681d5c659b76a1d309c67f',
+            'reference' => '5ce89dad42ec5bf0a45fd244b05421c4f5c36299',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(

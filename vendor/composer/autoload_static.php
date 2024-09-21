@@ -30,6 +30,7 @@ class ComposerStaticInit6d9bf8c267a2108c3868131fe85b8832
         'DAPRODS\\Core\\Base' => __DIR__ . '/../..' . '/core/class-base.php',
         'DAPRODS\\Core\\Endpoint' => __DIR__ . '/../..' . '/core/class-endpoint.php',
         'DAPRODS\\Core\\Loader' => __DIR__ . '/../..' . '/core/class-loader.php',
+        'DAPRODS\\Core\\ProductHelper' => __DIR__ . '/../..' . '/core/class-product-helper.php',
         'DAPRODS\\Core\\Singleton' => __DIR__ . '/../..' . '/core/class-singleton.php',
         'PHPCSUtils\\AbstractSniffs\\AbstractArrayDeclarationSniff' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/AbstractSniffs/AbstractArrayDeclarationSniff.php',
         'PHPCSUtils\\BackCompat\\BCFile' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/BackCompat/BCFile.php',

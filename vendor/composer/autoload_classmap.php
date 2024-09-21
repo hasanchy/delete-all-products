@@ -15,6 +15,7 @@ return array(
     'DAPRODS\\Core\\Base' => $baseDir . '/core/class-base.php',
     'DAPRODS\\Core\\Endpoint' => $baseDir . '/core/class-endpoint.php',
     'DAPRODS\\Core\\Loader' => $baseDir . '/core/class-loader.php',
+    'DAPRODS\\Core\\ProductHelper' => $baseDir . '/core/class-product-helper.php',
     'DAPRODS\\Core\\Singleton' => $baseDir . '/core/class-singleton.php',
     'PHPCSUtils\\AbstractSniffs\\AbstractArrayDeclarationSniff' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/AbstractSniffs/AbstractArrayDeclarationSniff.php',
     'PHPCSUtils\\BackCompat\\BCFile' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/BackCompat/BCFile.php',

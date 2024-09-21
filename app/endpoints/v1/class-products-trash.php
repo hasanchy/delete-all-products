@@ -9,6 +9,7 @@ namespace DAPRODS\App\Endpoints\V1;
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use DAPRODS\Core\Endpoint;
+use DAPRODS\Core\ProductHelper;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -51,7 +52,8 @@ class ProductsTrash extends Endpoint {
 	 * @since 1.0.0
 	 */
 	public function trash_products( WP_REST_Request $request ) {
-		$nonce = $request->get_header( 'X-WP-NONCE' );
+		// Sanitize the nonce header value
+		$nonce = sanitize_text_field( $request->get_header( 'X-WP-NONCE' ) );
 		if ( ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
@@ -73,34 +75,9 @@ class ProductsTrash extends Endpoint {
 		// Prepare response
 		$response = array(
 			'total_trashed' => $total_trashed,
-			'stat'          => $this->get_product_stat(),
+			'stat'          => ProductHelper::get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );
-	}
-
-	public function get_product_stat() {
-		$args         = array(
-			'post_type'      => 'product',
-			'post_status'    => array( 'publish', 'pending', 'draft', 'private' ),
-			'posts_per_page' => -1, // Retrieve all products
-		);
-		$products     = get_posts( $args );
-		$products_all = count( $products );
-
-		$args = array(
-			'post_type'      => 'product',
-			'post_status'    => 'trash',
-			'posts_per_page' => -1, // Retrieve all trashed products
-		);
-
-		$trashed_products       = get_posts( $args );
-		$trashed_products_count = count( $trashed_products );
-
-		// Prepare response
-		return array(
-			'all'   => $products_all,
-			'trash' => $trashed_products_count,
-		);
 	}
 }

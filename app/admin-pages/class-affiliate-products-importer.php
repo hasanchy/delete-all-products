@@ -73,31 +73,16 @@ class AffiliateProductsImporter extends Base {
 	 */
 	public function add_action_links( $links ) {
 		$new_links = array(
-			'<a href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">' . __( 'Import', 'delete-all-products' ) . '</a>',
+			'<a href="' . admin_url( 'edit.php?post_type=product&page=' . $this->page_slug ) . '">' . __( 'Delete Products', 'delete-all-products' ) . '</a>',
 		);
 		return array_merge( $new_links, $links );
 	}
-
-	/**
-	 *
-	 * SVG icon for menu
-	 * @return string
-	 * @since 1.0.0
-	 *
-	 **/
-	public function getIcon() {
-		// Encode the SVG data for embedding it as a data URI
-		$svg = '<svg viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1344 928q0-14-9-23t-23-9h-224v-352q0-13-9.5-22.5t-22.5-9.5h-192q-13 0-22.5 9.5t-9.5 22.5v352h-224q-13 0-22.5 9.5t-9.5 22.5q0 14 9 23l352 352q9 9 23 9t23-9l351-351q10-12 10-24zm640 224q0 159-112.5 271.5t-271.5 112.5h-1088q-185 0-316.5-131.5t-131.5-316.5q0-130 70-240t188-165q-2-30-2-43 0-212 150-362t362-150q156 0 285.5 87t188.5 231q71-62 166-62 106 0 181 75t75 181q0 76-41 138 130 31 213.5 135.5t83.5 238.5z" fill="#fff"/></svg>';
-		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode -- This use of base64_encode is safe for embedding SVG data as a data URI
-		return 'data:image/svg+xml;base64,' . base64_encode( $svg );
-	}
-
 
 	public function register_admin_page() {
 		$page = add_submenu_page(
 			'edit.php?post_type=product', // Parent slug for WooCommerce Products menu
 			$this->page_title,
-			__( 'Delete All Products', 'delete-all-products' ),
+			__( 'Delete Products', 'delete-all-products' ),
 			'manage_options',
 			$this->page_slug,
 			array( $this, 'callback' )

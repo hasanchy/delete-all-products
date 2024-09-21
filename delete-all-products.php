@@ -1,43 +1,110 @@
 <?php
 /**
  * Main file for WordPress.
- * 
+ *
  * @wordpress-plugin
  * Plugin Name:     Delete All Products for WooCommerce
  * Description:     Efficiently delete all WooCommerce products in just a few clicks
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         1.0.4
+ * Version:         1.1.0
  * Text Domain:     delete-all-products
- * Domain Path:	    /languages
+ * Domain Path:     /languages
  *
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  */
 
-defined('ABSPATH') or die('No direct access allowed!'); // Avoid direct file request
+// Avoid direct file request
+defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
-/**
- * Plugin constants. This file is procedural coding style for initialization of
- * the plugin core and definition of plugin configuration.
- */
-if (defined('DAPRODS_PATH')) {
-    require_once dirname(__FILE__) . '/inc/base/others/fallback-already.php';
-    return;
+// Support for site-level autoloading.
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 
-define('DAPRODS_FILE', __FILE__);
-define('DAPRODS_PATH', dirname(DAPRODS_FILE));
-define('DAPRODS_SLUG', basename(DAPRODS_PATH));
-define('DAPRODS_INC', DAPRODS_PATH . '/inc/');
-define('DAPRODS_MIN_PHP', '7.2.0'); // Minimum of PHP 7.2 required for autoloading and namespacing
-define('DAPRODS_MIN_WP', '5.2.0'); // Minimum of WordPress 5.0 required
-define('DAPRODS_NS', 'DAPRODS');
-define('DAPRODS_IS_PRO', false);
-define('DAPRODS_SLUG_LITE', 'delete-all-products');
-define('DAPRODS_SLUG_PRO', 'delete-all-products-pro');
+// Plugin version.
+if ( ! defined( 'DAPRODS_VERSION' ) ) {
+	define( 'DAPRODS_VERSION', '1.0.0' );
+}
 
-// Check PHP Version and print notice if minimum not reached, otherwise start the plugin core
-require_once DAPRODS_INC .
-    'base/others/' .
-    (version_compare(phpversion(), DAPRODS_MIN_PHP, '>=') ? 'start.php' : 'fallback-php-version.php');
+// Define DAPRODS_PLUGIN_FILE.
+if ( ! defined( 'DAPRODS_PLUGIN_FILE' ) ) {
+	define( 'DAPRODS_PLUGIN_FILE', __FILE__ );
+}
+
+// Plugin directory.
+if ( ! defined( 'DAPRODS_DIR' ) ) {
+	define( 'DAPRODS_DIR', plugin_dir_path( __FILE__ ) );
+}
+
+// Plugin basename.
+if ( ! defined( 'DAPRODS_PLUGIN_BASENAME' ) ) {
+	define( 'DAPRODS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+}
+
+// Languages directory.
+if ( ! defined( 'DAPRODS_LANGUAGES_DIR' ) ) {
+	define( 'DAPRODS_LANGUAGES_DIR', DAPRODS_DIR . '/languages' );
+}
+
+// Plugin url.
+if ( ! defined( 'DAPRODS_URL' ) ) {
+	define( 'DAPRODS_URL', plugin_dir_url( __FILE__ ) );
+}
+
+// Assets url.
+if ( ! defined( 'DAPRODS_ASSETS_URL' ) ) {
+	define( 'DAPRODS_ASSETS_URL', DAPRODS_URL . '/assets' );
+}
+
+/**
+ * DAPRODS_AffiliateImporter class.
+ */
+class DAPRODS_AffiliateImporter {
+
+	/**
+	 * Holds the class instance.
+	 *
+	 * @var DAPRODS_AffiliateImporter $instance
+	 */
+	private static $instance = null;
+
+	/**
+	 * Return an instance of the class
+	 *
+	 * Return an instance of the DAPRODS_AffiliateImporter Class.
+	 *
+	 * @return DAPRODS_AffiliateImporter class instance.
+	 * @since 1.0.0
+	 *
+	 */
+	public static function get_instance() {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Class initializer.
+	 */
+	public function load() {
+		load_plugin_textdomain(
+			'delete-all-products',
+			false,
+			dirname( plugin_basename( __FILE__ ) ) . '/languages'
+		);
+
+		DAPRODS\Core\Loader::instance();
+	}
+}
+
+// Init the plugin and load the plugin instance for the first time.
+add_action(
+	'plugins_loaded',
+	function () {
+		DAPRODS_AffiliateImporter::get_instance()->load();
+	}
+);

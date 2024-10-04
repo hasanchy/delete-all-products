@@ -49,6 +49,47 @@ Want to contribute or report an issue? Check out the <a href="https://github.com
 4. Install and activate the plugin.
 5. Navigate to "Products" > "Delete Products" to start removing products.
 
+== FAQ ==
+= How do I delete all WooCommerce products at once? =
+
+With Delete All Products for WooCommerce, you can easily bulk delete all products in just a few steps. After installing and activating the plugin, navigate to Products > Delete Products, where you’ll have the option to either move all products to the trash or permanently delete all products already in the trash.
+
+= Can I restore all products after deleting them? =
+
+Yes, if you choose to move products to the trash, you can later restore all of them from the trash. However, if you permanently delete the products, they cannot be restored.
+
+= Will this plugin delete product categories, tags, or attributes =
+
+No, this plugin only deletes the products themselves. Product categories, tags, and attributes will remain intact.
+
+= Can I delete specific products instead of all products? =
+
+No, this plugin is designed for bulk deletion of all products. If you want to delete individual products, you'll need to do so manually in WooCommerce or by using another plugin.
+
+= Does the plugin affect other WooCommerce data like orders, customers, or settings? = 
+
+No, the plugin only removes products. Your orders, customers, and WooCommerce settings will remain unaffected.
+
+= How does the plugin improve store performance? =
+
+By deleting unnecessary products, especially if they are large in number, you can reduce database load, which may lead to faster store performance.
+
+= Can I use this plugin for testing purposes in development environments? =
+
+Yes, the plugin is ideal for developers setting up new stores or testing environments, allowing you to quickly remove demo or sample products in bulk.
+
+= Does this plugin support scheduled deletion or automation? =
+
+No, the plugin does not currently support scheduled or automated deletion. You must manually trigger the deletion process.
+
+= Can I stop the deletion process if it is already running? =
+
+Yes, the plugin includes a "Stop" button that allows you to halt the deletion process at any time during the operation.
+
+= How do I reinstall the plugin after deleting it? =
+
+You can reinstall the plugin by navigating to "Plugins" > "Add New" in your WordPress dashboard, searching for "Delete All Products by ThemeDyno," and installing it again.
+
 == Changelog ==
 1.0.0 (2024-02-04)
 Initial Release

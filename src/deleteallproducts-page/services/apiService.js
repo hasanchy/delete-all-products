@@ -16,6 +16,21 @@ export const fetchProductsStat = createAsyncThunk('products/stat', async (params
 	}
 });
 
+export const searchProducts = createAsyncThunk('products/search', async (params, { rejectWithValue }) => {
+	try{
+		const res = await axios.get(daprodsDeleteAllProducts.restEndpoint.productsSearch, {
+			params,
+			headers: {
+				'content-type': 'application/json',
+				'X-WP-NONCE': daprodsDeleteAllProducts.restNonce
+			}
+		});
+		return res.data;
+	} catch (error) {
+		return rejectWithValue(error.response.data);
+	}
+});
+
 export const trashProducts = createAsyncThunk('products/trash', async (params, { rejectWithValue }) => {
 	try{
 		const res = await axios.delete(daprodsDeleteAllProducts.restEndpoint.productsTrash, {

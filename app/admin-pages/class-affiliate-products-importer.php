@@ -133,6 +133,7 @@ class AffiliateProductsImporter extends Base {
 				'dom_element_id' => $this->unique_id,
 				'restEndpoint'   => array(
 					'productsStat'    => rest_url() . 'delete-all-products/v1/products/stat',
+					'productsSearch'  => rest_url() . 'delete-all-products/v1/products/search',
 					'productsTrash'   => rest_url() . 'delete-all-products/v1/products/trash',
 					'productsDelete'  => rest_url() . 'delete-all-products/v1/products/delete',
 					'productsRestore' => rest_url() . 'delete-all-products/v1/products/restore',

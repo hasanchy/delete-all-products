@@ -25,6 +25,7 @@ class ComposerStaticInit6d9bf8c267a2108c3868131fe85b8832
         'DAPRODS\\App\\Admin_Pages\\AffiliateProductsImporter' => __DIR__ . '/../..' . '/app/admin-pages/class-affiliate-products-importer.php',
         'DAPRODS\\App\\Endpoints\\V1\\ProductsDelete' => __DIR__ . '/../..' . '/app/endpoints/v1/class-products-delete.php',
         'DAPRODS\\App\\Endpoints\\V1\\ProductsRestore' => __DIR__ . '/../..' . '/app/endpoints/v1/class-products-restore.php',
+        'DAPRODS\\App\\Endpoints\\V1\\ProductsSearch' => __DIR__ . '/../..' . '/app/endpoints/v1/class-products-search.php',
         'DAPRODS\\App\\Endpoints\\V1\\ProductsStat' => __DIR__ . '/../..' . '/app/endpoints/v1/class-products-stat.php',
         'DAPRODS\\App\\Endpoints\\V1\\ProductsTrash' => __DIR__ . '/../..' . '/app/endpoints/v1/class-products-trash.php',
         'DAPRODS\\Core\\Base' => __DIR__ . '/../..' . '/core/class-base.php',

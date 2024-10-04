@@ -4,6 +4,7 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
 import { trashProducts } from '../../services/apiService';
+import SearchProducts from './SearchProducts';
 const { confirm } = Modal;
 
 const AllProducts = () => {
@@ -112,7 +113,7 @@ const AllProducts = () => {
     const renderMoveToTrashButton = () => {
         if( productsAll > 0 ) {
             return <Button type="primary" onClick={showMoveToTrashConfirm} loading={isTrashingInProgress} disabled={isProductsStatLoading || isRestoringInProgress || isDeletingInProgress}>
-                Move To Trash
+                Move All to Trash
             </Button>
         }
         return null;
@@ -129,24 +130,28 @@ const AllProducts = () => {
     }
 
     return (
-        <Card>
-            <Space direction="vertical" size="large" style={{ display: 'flex' }}>
-                <Row>
-                    <Col span={24}>
-                        {renderTrashAllProgress()}
-                        {renderInfo()}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Space>
-                            {renderMoveToTrashButton()}
-                            {renderStopButton()}
-                        </Space>
-                    </Col>
-                </Row>
-            </Space>
-        </Card>
+        <Space direction="vertical" size="large" style={{ display: 'flex' }}>
+            <Card>
+                <Space direction="vertical" size="large" style={{ display: 'flex' }}>
+                    <Row>
+                        <Col span={24}>
+                            {renderTrashAllProgress()}
+                            {renderInfo()}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Space>
+                                {renderMoveToTrashButton()}
+                                {renderStopButton()}
+                            </Space>
+                        </Col>
+                    </Row>
+                </Space>
+            </Card>
+            
+            <SearchProducts />
+        </Space>
     );
 };
 

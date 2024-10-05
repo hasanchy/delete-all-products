@@ -77,7 +77,7 @@ class ProductsRestore extends Endpoint {
 
 		// Prepare response
 		$response = array(
-			'total_restored' => $total_restored,
+			'total' => $total_restored,
 			'stat'           => ProductHelper::get_product_stat(),
 		);
 

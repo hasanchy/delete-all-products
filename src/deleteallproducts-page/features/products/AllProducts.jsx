@@ -39,7 +39,7 @@ const AllProducts = () => {
 
             try {
                 let response = await dispatch(trashProducts());
-                totalTrashed += response.payload.total_trashed;
+                totalTrashed += response.payload.total;
                 totalProducts = totalTrashed + response.payload.stat.all;
 
                 setTotalTrashed(totalTrashed);

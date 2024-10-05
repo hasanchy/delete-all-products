@@ -41,7 +41,7 @@ const TrashedProducts = () => {
 
             try {
                 let response = await dispatch(restoreProducts({ limit: DELETE_PRODUCTS_PER_REQUEST }));
-                totalRestored += response.payload.total_restored;
+                totalRestored += response.payload.total;
                 totalProducts = totalRestored + response.payload.stat.trash;
 
                 setTotalRestored(totalRestored);
@@ -76,7 +76,7 @@ const TrashedProducts = () => {
 
             try {
                 let response = await dispatch(deleteProducts());
-                totalDeleted += response.payload.total_deleted;
+                totalDeleted += response.payload.total;
                 totalProducts = totalDeleted + response.payload.stat.trash;
 
                 setTotalDeleted(totalDeleted);

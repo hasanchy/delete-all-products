@@ -3,7 +3,7 @@ import { Alert, Button, Card, Checkbox, Col, Form, Modal, Progress, Row, Space }
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
-import { searchProducts, trashProducts } from '../../services/apiService';
+import { deleteProducts, searchProducts, trashProducts } from '../../services/apiService';
 const { confirm } = Modal;
 
 const SearchProducts = () => {
@@ -29,32 +29,32 @@ const SearchProducts = () => {
 
     const [displaySearchResult, setDisplaySearchResult] = useState(false);
     const [displayDeleteButtons, setDisplayDeleteButtons] = useState(false);
-    const [isProductsTrashing, setIsProductsTrashing] = useState(false);
     const [isProductsDeleting, setIsProductsDeleting] = useState(false);
 
-
     const [totalProducts, setTotalProducts] = useState(0);
-    const [totalTrashed, setTotalTrashed] = useState(0);
-    const [displayTrashingProgressBar, setDisplayTrashingProgressBar] = useState(false);
-    const [isTrashCancellingInProgress, setIsTrashCancellingInProgress] = useState(false);
+    const [totalDeleted, setTotalDeleted] = useState(0);
+    const [displayProgressBar, setDisplayProgressBar] = useState(false);
+    const [isDeleteCancellingInProgress, setIsDeleteCancellingInProgress] = useState(false);
     const [displayStopButton, setDisplayStopButton] = useState(false);
 
     // Use useRef for cancellation state
-    const isTrashingCancelled = useRef(false);
+    const isDeleteOperationCancelled = useRef(false);
+    const deleteType = useRef('');
 
-    const handleTrashSearchProducts = async () => {
+    const handleProductsDelete = async ( type ) => {
 
-        setIsProductsTrashing(true);
+        deleteType.current = type;
+        setIsProductsDeleting(true);
 
-        let totalTrashed = 0;
+        let totalDeleted = 0;
         let searchCount = productsSearchResult;
         let totalProducts = productsSearchResult;
 
-        setTotalTrashed(totalTrashed);
+        setTotalDeleted(totalDeleted);
         setTotalProducts(totalProducts);
         setDisplayStopButton( true );
-        setDisplayTrashingProgressBar(true);
-        isTrashingCancelled.current = false; // Reset cancellation state before starting
+        setDisplayProgressBar(true);
+        isDeleteOperationCancelled.current = false; // Reset cancellation state before starting
 
         // Filter out unchecked statuses
         const stock_status = Object.keys(filters.stock_status).filter(key => filters.stock_status[key]);
@@ -64,18 +64,23 @@ const SearchProducts = () => {
         if (stock_status.length > 0) params.stock_status = stock_status;
         if (product_status.length > 0) params.product_status = product_status;
 
-        while (totalTrashed < totalProducts) {
-            if (isTrashingCancelled.current) {
+        while (totalDeleted < totalProducts) {
+            if (isDeleteOperationCancelled.current) {
                 break; // Exit the loop if trashing is cancelled
             }
 
             try {
-                let response = await dispatch(trashProducts(params));
+                let response;
+                if(type === 'delete_permanently' ){
+                    response = await dispatch(deleteProducts(params));
+                }else{
+                    response = await dispatch(trashProducts(params));
+                }
                 searchCount = response.payload.search_count;
-                totalTrashed += response.payload.total_trashed;
-                totalProducts = totalTrashed + searchCount;
+                totalDeleted += response.payload.total;
+                totalProducts = totalDeleted + searchCount;
 
-                setTotalTrashed(totalTrashed);
+                setTotalDeleted(totalDeleted);
                 setTotalProducts(totalProducts);
             } catch (error) {
                 console.error('Error trashing products:', error);
@@ -83,14 +88,15 @@ const SearchProducts = () => {
             }
         }
 
-        setDisplayTrashingProgressBar( false );
-        setIsTrashCancellingInProgress( false );
+        setDisplayProgressBar( false );
+        setIsDeleteCancellingInProgress( false );
         setDisplayStopButton( false );
-        setIsProductsTrashing(false);
+        setIsProductsDeleting(false);
         
         if(!searchCount){
             setDisplayDeleteButtons(false);
         }
+        deleteType.current = '';
     };
 
 
@@ -155,7 +161,7 @@ const SearchProducts = () => {
                 danger: true,
             },
             onOk() {
-                // handleDeleteAllProducts();
+                handleProductsDelete( 'delete_permanently' );
             },
             cancelText:'No',
             onCancel() {
@@ -173,7 +179,7 @@ const SearchProducts = () => {
             content: 'Are you sure you want to move all the products to the trash?',
             okText: 'Yes',
             onOk() {
-                handleTrashSearchProducts();
+                handleProductsDelete( 'move_to_trash' );
             },
             cancelText: 'No',
             onCancel() {
@@ -185,13 +191,13 @@ const SearchProducts = () => {
     };
 
     const handleStop = () => {
-        isTrashingCancelled.current = true; // Set cancellation state to true
-        setIsTrashCancellingInProgress( true );
+        isDeleteOperationCancelled.current = true; // Set cancellation state to true
+        setIsDeleteCancellingInProgress( true );
     };
 
     const renderDeleteButton = () => {
-        if( displayDeleteButtons && !isProductsTrashing ) {
-            return <Button type="primary" danger onClick={showDeletePermanentlyConfirm} loading={false} disabled={false}>
+        if( displayDeleteButtons && deleteType.current !== 'move_to_trash' ) {
+            return <Button type="primary" danger onClick={showDeletePermanentlyConfirm} loading={isProductsDeleting} disabled={false}>
                 Delete Permanently
             </Button>
         }
@@ -199,8 +205,8 @@ const SearchProducts = () => {
     }
 
     const renderRestoreTrashButton = () => {
-        if( displayDeleteButtons && !isProductsDeleting) {
-            return <Button type="primary" onClick={showMoveToTrashConfirm} loading={isProductsTrashing} disabled={false}>
+        if( displayDeleteButtons && deleteType.current !== 'delete_permanently') {
+            return <Button type="primary" onClick={showMoveToTrashConfirm} loading={isProductsDeleting} disabled={false}>
                 Move to Trash
             </Button>
         }
@@ -209,7 +215,7 @@ const SearchProducts = () => {
 
     const renderStopButton = () => {
         if( displayStopButton ){
-            return <Button type="default" onClick={handleStop} loading={isTrashCancellingInProgress}>
+            return <Button type="default" onClick={handleStop} loading={isDeleteCancellingInProgress}>
                 Stop
             </Button>
         }
@@ -217,17 +223,28 @@ const SearchProducts = () => {
     }
 
     const renderTrashAllProgress = () => {
-        if (displayTrashingProgressBar) {
-            let percent = Math.round((totalTrashed / totalProducts) * 100);
+        if (displayProgressBar) {
+            let percent = Math.round((totalDeleted / totalProducts) * 100);
+            let deleted;
+            let progressBarColor;
+
+            if( deleteType.current === 'delete_permanently' ){
+                deleted = 'Deleted';
+                progressBarColor = '#ff4d4f';
+            }else{
+                deleted = 'Trashed';
+                progressBarColor = '#531dab';
+            }
+
             return (
                 <div>
-                    <b>{`Trashed ${totalTrashed} out of ${totalProducts} products.`}</b>
+                    <b>{`${deleted} ${totalDeleted} out of ${totalProducts} products.`}</b>
                     <Progress
                         percent={percent}
                         status="active"
                         strokeColor={{
-                            from: '#531dab',
-                            to: '#531dab',
+                            from: progressBarColor,
+                            to: progressBarColor,
                         }}
                         showInfo={true}
                     />

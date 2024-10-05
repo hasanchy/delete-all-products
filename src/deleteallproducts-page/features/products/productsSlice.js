@@ -69,6 +69,7 @@ export const productsSlice = createSlice({
             state.isDeletingInProgress = false;
 			state.productsAll = action.payload.stat.all;
 			state.productsTrash = action.payload.stat.trash;
+			state.productsSearchResult = action.payload.search_count;
 		}),
 		builder.addCase(deleteProducts.rejected, (state, action) => {
 			state.isDeletingInProgress = false;

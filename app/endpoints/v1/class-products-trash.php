@@ -117,7 +117,7 @@ class ProductsTrash extends Endpoint {
 		// Prepare the response data
 		$response = array(
 			'search_count'  => ProductHelper::get_product_count( $stock_status, $product_status ),
-			'total_trashed' => $total_trashed,
+			'total' => $total_trashed,
 			'stat'          => ProductHelper::get_product_stat(),
 		);
 

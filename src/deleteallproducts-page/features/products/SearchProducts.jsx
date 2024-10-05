@@ -47,6 +47,7 @@ const SearchProducts = () => {
         setIsProductsTrashing(true);
 
         let totalTrashed = 0;
+        let searchCount = productsSearchResult;
         let totalProducts = productsSearchResult;
 
         setTotalTrashed(totalTrashed);
@@ -70,8 +71,9 @@ const SearchProducts = () => {
 
             try {
                 let response = await dispatch(trashProducts(params));
+                searchCount = response.payload.search_count;
                 totalTrashed += response.payload.total_trashed;
-                totalProducts = totalTrashed + response.payload.search_count;
+                totalProducts = totalTrashed + searchCount;
 
                 setTotalTrashed(totalTrashed);
                 setTotalProducts(totalProducts);
@@ -85,6 +87,10 @@ const SearchProducts = () => {
         setIsTrashCancellingInProgress( false );
         setDisplayStopButton( false );
         setIsProductsTrashing(false);
+        
+        if(!searchCount){
+            setDisplayDeleteButtons(false);
+        }
     };
 
 
@@ -115,6 +121,8 @@ const SearchProducts = () => {
         setDisplaySearchResult(true);
         if(response.payload.search_count > 0){
             setDisplayDeleteButtons(true);
+        }else{
+            setDisplayDeleteButtons(false);
         }
     };
 
@@ -212,7 +220,7 @@ const SearchProducts = () => {
         if (displayTrashingProgressBar) {
             let percent = Math.round((totalTrashed / totalProducts) * 100);
             return (
-                <>
+                <div>
                     <b>{`Trashed ${totalTrashed} out of ${totalProducts} products.`}</b>
                     <Progress
                         percent={percent}
@@ -223,7 +231,7 @@ const SearchProducts = () => {
                         }}
                         showInfo={true}
                     />
-                </>
+                </div>
             );
         }
         return null;
@@ -327,8 +335,10 @@ const SearchProducts = () => {
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                 <Row>
                     <Col span={24}>
-                        {renderSearchResult()}
-                        {renderTrashAllProgress()}
+                        <Space direction="vertical" size="large" style={{ display: 'flex' }}>
+                            {renderSearchResult()}
+                            {renderTrashAllProgress()}
+                        </Space>
                     </Col>
                 </Row>
                 <Row>

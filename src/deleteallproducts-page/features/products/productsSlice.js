@@ -46,6 +46,7 @@ export const productsSlice = createSlice({
             state.isTrashingInProgress = false;
 			state.productsAll = action.payload.stat.all;
 			state.productsTrash = action.payload.stat.trash;
+			state.productsSearchResult = action.payload.search_count;
 		}),
 		builder.addCase(trashProducts.rejected, (state, action) => {
 			state.isTrashingInProgress = false;

@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteProducts, fetchProductsStat, restoreProducts, trashProducts } from '../../services/apiService';
+import { deleteProducts, fetchProductsStat, searchProducts, restoreProducts, trashProducts } from '../../services/apiService';
 
 const initialState = {
 	productsScreen: 'default',
 	isProductsStatLoading: false,
+	isProductsSearching: false,
 	isTrashingInProgress: false,
 	isRestoringInProgress: false,
 	isDeletingInProgress: false,
 	productsAll: 0,
+	productsSearchResult: 0,
 	productsTrash: 0
 }
 
@@ -69,7 +71,17 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(deleteProducts.rejected, (state, action) => {
 			state.isDeletingInProgress = false;
-		})
+		}),
+		builder.addCase(searchProducts.pending, (state) => {
+			state.isProductsSearching = true;
+		}),
+		builder.addCase(searchProducts.fulfilled, (state, action) => {
+            state.isProductsSearching = false;
+			state.productsSearchResult = action.payload.search_count;
+		}),
+		builder.addCase(searchProducts.rejected, (state, action) => {
+			state.isProductsSearching = false;
+        })
 	}
 })
 

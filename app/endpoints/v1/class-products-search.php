@@ -83,7 +83,10 @@ class ProductsSearch extends Endpoint {
 		$product_status = $request->get_param( 'product_status' );
 
 		// Get product stats with optional filters
-		$response = ProductHelper::get_product_count( $stock_status, $product_status );
+		$product_count = ProductHelper::get_product_count( $stock_status, $product_status );
+		$response = array(
+			'search_count' => rest_sanitize_value_from_schema( $product_count, array( 'type' => 'integer' ) ),
+		);
 
 		return new WP_REST_Response( $response );
 	}

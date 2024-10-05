@@ -63,9 +63,6 @@ class ProductHelper {
 		$query = new \WP_Query( $args );
 		$product_count = $query->found_posts;
 
-		// Return the count of products based on the filters
-		return array(
-			'product_count' => rest_sanitize_value_from_schema( $product_count, array( 'type' => 'integer' ) ),
-		);
+		return $product_count;
 	}
 }

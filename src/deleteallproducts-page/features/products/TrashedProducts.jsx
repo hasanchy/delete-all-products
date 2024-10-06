@@ -4,6 +4,7 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { deleteProducts, restoreProducts } from '../../services/apiService';
 import { useDispatch, useSelector } from 'react-redux';
+import ActionButtons from './ActionButtons';
 const { confirm } = Modal;
 
 const TrashedProducts = () => {
@@ -219,19 +220,20 @@ const TrashedProducts = () => {
     return (
         <Card>
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
-                <Row>
+                {/* <Row>
                     <Col span={24}>
                         {renderTrashAllProgress()}
                         {renderDeleteAllProgress()}
                         {renderInfo()}
                     </Col>
-                </Row>
+                </Row> */}
                 <Row>
-                    <Col>
+                    <Col span={24}>
+                        <ActionButtons filters={{ product_status: { trash: true } }} total={productsTrash} isLoading={isProductsStatLoading}/>
                         <Space>
-                            {renderDeleteButton()}
+                            {/* {renderDeleteButton()}
                             {renderRestoreTrashButton()}
-                            {renderStopButton()}
+                            {renderStopButton()} */}
                         </Space>
                     </Col>
                 </Row>

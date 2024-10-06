@@ -9,7 +9,6 @@ const initialState = {
 	isRestoringInProgress: false,
 	isDeletingInProgress: false,
 	productsAll: 0,
-	productsSearchResult: 0,
 	productsTrash: 0
 }
 
@@ -46,7 +45,6 @@ export const productsSlice = createSlice({
             state.isTrashingInProgress = false;
 			state.productsAll = action.payload.stat.all;
 			state.productsTrash = action.payload.stat.trash;
-			state.productsSearchResult = action.payload.search_count;
 		}),
 		builder.addCase(trashProducts.rejected, (state, action) => {
 			state.isTrashingInProgress = false;
@@ -69,7 +67,6 @@ export const productsSlice = createSlice({
             state.isDeletingInProgress = false;
 			state.productsAll = action.payload.stat.all;
 			state.productsTrash = action.payload.stat.trash;
-			state.productsSearchResult = action.payload.search_count;
 		}),
 		builder.addCase(deleteProducts.rejected, (state, action) => {
 			state.isDeletingInProgress = false;
@@ -79,7 +76,6 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(searchProducts.fulfilled, (state, action) => {
             state.isProductsSearching = false;
-			state.productsSearchResult = action.payload.search_count;
 		}),
 		builder.addCase(searchProducts.rejected, (state, action) => {
 			state.isProductsSearching = false;

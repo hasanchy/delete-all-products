@@ -50,11 +50,11 @@ class ProductsDelete extends Endpoint {
 							'required'    => false,
 						),
 						'product_status' => array(
-							'description' => 'Filter by product status (publish, pending, draft, private)',
+							'description' => 'Filter by product status (publish, pending, draft, private, trash)',
 							'type'        => 'array',
 							'items'       => array(
 								'type' => 'string',
-								'enum' => array( 'publish', 'pending', 'draft', 'private' ),
+								'enum' => array( 'publish', 'pending', 'draft', 'private', 'trash' ),
 							),
 							'required'    => false,
 						),

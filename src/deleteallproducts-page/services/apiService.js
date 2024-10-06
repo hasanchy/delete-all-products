@@ -61,9 +61,9 @@ export const deleteProducts = createAsyncThunk('products/delete', async (params,
 	}
 });
 
-export const restoreProducts = createAsyncThunk('products/restore', async ({ rejectWithValue }) => {
+export const restoreProducts = createAsyncThunk('products/restore', async (data, { rejectWithValue }) => {
 	try{
-		const res = await axios.post(daprodsDeleteAllProducts.restEndpoint.productsRestore, {}, {
+		const res = await axios.post(daprodsDeleteAllProducts.restEndpoint.productsRestore, data, {
 			headers: {
 				'content-type': 'application/json',
 				'X-WP-NONCE': daprodsDeleteAllProducts.restNonce

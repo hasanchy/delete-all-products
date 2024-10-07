@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Col, Modal, Progress, Row, Space, Card, Alert, Spin } from "antd";
+import { Button, Col, Modal, Progress, Row, Space, Alert, Spin } from "antd";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,16 +7,21 @@ import { deleteProducts, restoreProducts, trashProducts } from '../../services/a
 const { confirm } = Modal;
 
 const ActionButtons = ( {filters, total, isLoading} ) => {
+    
+    const { isTrashingInProgress, isRestoringInProgress, isDeletingInProgress } = useSelector((state) => state.products);
+    const isGlobalOperationInProgress = (isTrashingInProgress || isRestoringInProgress || isDeletingInProgress) ? true : false;
     const dispatch = useDispatch();
+
+    const pluralize = require('pluralize');
     const productStatus = filters.product_status?.trash ? 'trash' : 'all';
-    const hasFilters = Object.keys(filters).length > 1 ? true : false; 
+    const hasFilters = Object.keys(filters).length > 1 ? true : false;
 
     const [isOperationInProgress, setIsOperationInProgress] = useState(false);
 
     const [totalProducts, setTotalProducts] = useState(0);
     const [totalExecuted, setTotalExecuted] = useState(0);
     const [displayProgressBar, setDisplayProgressBar] = useState(false);
-    const [isDeleteCancellingInProgress, setIsDeleteCancellingInProgress] = useState(false);
+    const [isDeleteCancellationInProgress, setIsCancellationInProgress] = useState(false);
     const [displayStopButton, setDisplayStopButton] = useState(false);
     const [searchResult, setSearchResult] = useState(total);
 
@@ -80,17 +85,18 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         }
 
         setDisplayProgressBar( false );
-        setIsDeleteCancellingInProgress( false );
+        setIsCancellationInProgress( false );
         setDisplayStopButton( false );
         setIsOperationInProgress(false);
         operationType.current = '';
     };
 
     const showDeletePermanentlyConfirm = () => {
+        let trashMessage = ( productStatus === 'trash' ) ? ' from the trash' : '';
         confirm({
             title: 'Delete Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: 'Are you sure you want to permanently delete all the trashed products?',
+            content: <>Are you sure you want to permanently delete <b>{searchResult}</b> {pluralize('product', searchResult)}{trashMessage}?</>,
             okText: 'Yes',
             okButtonProps: {
                 danger: true,
@@ -111,7 +117,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         confirm({
             title: 'Trash Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: 'Are you sure you want to move all the products to the trash?',
+            content: <>Are you sure you want to move <b>{searchResult}</b> {pluralize('product', searchResult)} to the trash?</>,
             okText: 'Yes',
             onOk() {
                 handleProductsOperation( 'move_to_trash' );
@@ -129,7 +135,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         confirm({
             title: 'Restore Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: 'Are you sure you want to restore all the trashed products?',
+            content: <>Are you sure you want to restore <b>{searchResult}</b> {pluralize('product', searchResult)} from the trash?</>,
             okText: 'Yes',
             onOk() {
                 handleProductsOperation( 'restore_trash' );
@@ -145,12 +151,12 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
 
     const handleStop = () => {
         isOperationCancelled.current = true; // Set cancellation state to true
-        setIsDeleteCancellingInProgress( true );
+        setIsCancellationInProgress( true );
     };
 
     const renderDeleteButton = () => {
         if( searchResult > 0 && operationType.current !== 'move_to_trash' && operationType.current !== 'restore_trash' ) {
-            return <Button type="primary" danger onClick={showDeletePermanentlyConfirm} loading={isOperationInProgress} disabled={false}>
+            return <Button type="primary" danger onClick={showDeletePermanentlyConfirm} loading={isOperationInProgress} disabled={!isOperationInProgress && isGlobalOperationInProgress}>
                 Delete Permanently
             </Button>
         }
@@ -159,7 +165,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
 
     const renderMoveToTrashButton = () => {
         if( productStatus === 'all' && searchResult > 0 && operationType.current !== 'delete_permanently') {
-            return <Button type="primary" onClick={showMoveToTrashConfirm} loading={isOperationInProgress} disabled={false}>
+            return <Button type="primary" onClick={showMoveToTrashConfirm} loading={isOperationInProgress} disabled={!isOperationInProgress && isGlobalOperationInProgress}>
                 Move to Trash
             </Button>
         }
@@ -168,7 +174,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
 
     const renderRestoreTrashButton = () => {
         if( productStatus === 'trash' && searchResult > 0 && operationType.current !== 'delete_permanently') {
-            return <Button type="primary" onClick={showRestoreTrashConfirm} loading={isOperationInProgress} disabled={false}>
+            return <Button type="primary" onClick={showRestoreTrashConfirm} loading={isOperationInProgress} disabled={!isOperationInProgress && isGlobalOperationInProgress}>
                 Restore Trash
             </Button>
         }
@@ -177,7 +183,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
 
     const renderStopButton = () => {
         if( displayStopButton ){
-            return <Button type="default" onClick={handleStop} loading={isDeleteCancellingInProgress}>
+            return <Button type="default" onClick={handleStop} loading={isDeleteCancellationInProgress}>
                 Stop
             </Button>
         }
@@ -222,12 +228,13 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
     const renderSearchResult = () => {
         if (!displayProgressBar) {
             let description;
+            let trashMessage = ( productStatus === 'trash' ) ? ' in the trash' : '';
             if(searchResult === 1 ){
-                description = `A total of ${searchResult} product was found.`;
+                description = `A total of ${searchResult} product was found${trashMessage}.`;
             }else if(searchResult > 1){
-                description = `A total of ${searchResult} products were found.`;
+                description = `A total of ${searchResult} products were found${trashMessage}.`;
             }else{
-                description = `No products were found.`;
+                description = `No products were found${trashMessage}.`;
             }
             
             let alertType; 

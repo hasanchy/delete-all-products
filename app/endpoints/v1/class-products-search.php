@@ -40,7 +40,7 @@ class ProductsSearch extends Endpoint {
 					'callback'            => array( $this, 'get_products_count' ),
 					'permission_callback' => array( $this, 'edit_permission' ),
 					'args'                => array(
-						'stock_status' => array(
+						'stock_status'   => array(
 							'description' => 'Filter by stock status (in_stock, out_of_stock, on_backorder)',
 							'type'        => 'array',
 							'items'       => array(
@@ -84,7 +84,7 @@ class ProductsSearch extends Endpoint {
 
 		// Get product stats with optional filters
 		$product_count = ProductHelper::get_product_count( $stock_status, $product_status );
-		$response = array(
+		$response      = array(
 			'search_count' => rest_sanitize_value_from_schema( $product_count, array( 'type' => 'integer' ) ),
 		);
 

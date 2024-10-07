@@ -40,7 +40,7 @@ class ProductsDelete extends Endpoint {
 					'callback'            => array( $this, 'delete_products' ),
 					'permission_callback' => array( $this, 'edit_permission' ),
 					'args'                => array(
-						'stock_status' => array(
+						'stock_status'   => array(
 							'description' => 'Filter by stock status (instock, outofstock, onbackorder)',
 							'type'        => 'array',
 							'items'       => array(
@@ -99,7 +99,10 @@ class ProductsDelete extends Endpoint {
 					'compare' => '=',
 				);
 			}
-			$args['meta_query'] = array( 'relation' => 'OR', $meta_query );
+			$args['meta_query'] = array(
+				'relation' => 'OR',
+				$meta_query,
+			);
 		}
 
 		// Get the products based on the filtered arguments
@@ -116,9 +119,9 @@ class ProductsDelete extends Endpoint {
 
 		// Prepare response
 		$response = array(
-			'search_count'  => ProductHelper::get_product_count( $stock_status, $product_status ),
-			'total' => $total_deleted,
-			'stat'          => ProductHelper::get_product_stat(),
+			'search_count' => ProductHelper::get_product_count( $stock_status, $product_status ),
+			'total'        => $total_deleted,
+			'stat'         => ProductHelper::get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );

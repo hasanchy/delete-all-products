@@ -70,7 +70,7 @@ class ProductsRestore extends Endpoint {
 		}
 
 		// Get optional parameters
-		$stock_status   = $request->get_param( 'stock_status' );
+		$stock_status = $request->get_param( 'stock_status' );
 
 		// Build query arguments dynamically based on provided filters
 		$args = array(
@@ -89,7 +89,10 @@ class ProductsRestore extends Endpoint {
 					'compare' => '=',
 				);
 			}
-			$args['meta_query'] = array( 'relation' => 'OR', $meta_query );
+			$args['meta_query'] = array(
+				'relation' => 'OR',
+				$meta_query,
+			);
 		}
 
 		// Get the products based on the filtered arguments
@@ -111,9 +114,9 @@ class ProductsRestore extends Endpoint {
 
 		// Prepare response
 		$response = array(
-			'search_count'  => ProductHelper::get_product_count( $stock_status, array( 'trash' ) ),
-			'total'         => $total_restored,
-			'stat'          => ProductHelper::get_product_stat(),
+			'search_count' => ProductHelper::get_product_count( $stock_status, array( 'trash' ) ),
+			'total'        => $total_restored,
+			'stat'         => ProductHelper::get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );

@@ -60,7 +60,7 @@ class ProductHelper {
 		}
 
 		// Execute the query
-		$query = new \WP_Query( $args );
+		$query         = new \WP_Query( $args );
 		$product_count = $query->found_posts;
 
 		return $product_count;

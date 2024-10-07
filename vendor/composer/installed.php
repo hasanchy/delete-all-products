@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2494cf09a4fccb7ed2d5a8ddf306ef1221b4b396',
+        'reference' => '61f01848d999fd16e9cf7c324a37f83d64cff266',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2494cf09a4fccb7ed2d5a8ddf306ef1221b4b396',
+            'reference' => '61f01848d999fd16e9cf7c324a37f83d64cff266',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -58,7 +58,7 @@
         'phpcsstandards/phpcsextra' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'de3789a59ee046291bb196c03862c871a692dc75',
+            'reference' => '6f99815752a5b27f0e6e751777f305cb8eb3fe66',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsextra',
             'aliases' => array(
@@ -69,7 +69,7 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '5ce89dad42ec5bf0a45fd244b05421c4f5c36299',
+            'reference' => 'b3d58ca0d6a3f19eb9e187375d3a4af1ef498d12',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(
@@ -80,7 +80,7 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '92c8ef54357ea09d93f8efa043d7c9c0a71ae094',
+            'reference' => '2e3c58b0f4936bc1f83d4c5783248acc589fe858',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(

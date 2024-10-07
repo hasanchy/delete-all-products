@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Button, Card, Checkbox, Form, Space } from "antd";
+import { Button, Card, Checkbox, Form, Space } from "antd";
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchProducts } from '../../services/apiService';
@@ -29,9 +29,7 @@ const SearchProducts = () => {
 
     const [savedFilters, setSavedFilters] = useState({});
 
-    const [displaySearchResult, setDisplaySearchResult] = useState(false);
     const [searchResult, setSearchResult] = useState(0);
-    const [displayDeleteButtons, setDisplayDeleteButtons] = useState(false);
 
     // Handle checkbox changes dynamically for stock_status and product_status
     const handleCheckboxChange = (category, key, checked) => {
@@ -58,34 +56,9 @@ const SearchProducts = () => {
         let response = await dispatch(searchProducts(params));
         
         setSearchResult(response.payload.search_count);
-        setDisplaySearchResult(true);
-        // if(response.payload.search_count > 0){
-        //     setDisplayDeleteButtons(true);
-        // }else{
-        //     setDisplayDeleteButtons(false);
-        // }
 
         setSavedFilters(filters);
     };
-
-    const renderSearchResult = () => {
-        if(displaySearchResult && JSON.stringify(filters) === JSON.stringify(savedFilters) ){
-            let description;
-            if(searchResult === 1 ){
-                description = `A total of ${searchResult} product was found in this search result.`;
-            }else if(searchResult > 1){
-                description = `A total of ${searchResult} products were found in this search result.`;
-            }else{
-                description = `No products were found in this search result.`;
-            }
-            return <Alert
-                description={description}
-                type='warning'
-                showIcon={false}
-            />;
-        }
-        return null;
-    }
 
     const renderDeleteButtons = () => {
         if(JSON.stringify(filters) === JSON.stringify(savedFilters)){
@@ -190,7 +163,6 @@ const SearchProducts = () => {
                         </Button>
                     </Form.Item>
                 </Form>
-                {/* {renderSearchResult()} */}
                 {renderDeleteButtons()}
             </Space>
         </Card>

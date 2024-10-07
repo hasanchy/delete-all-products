@@ -8,12 +8,12 @@ Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
-Easily delete or move all WooCommerce products to the trash with just a few clicks.
+Easily delete all WooCommerce products permanently or move them to the trash in just a few clicks.
 
 == Description ==
 Need to clear out your WooCommerce store quickly? **Delete All Products for WooCommerce** is the ideal plugin for fast, bulk removal of all products. With one click, you can either move products to the trash for future recovery or delete them permanently.
 
-[youtube https://www.youtube.com/watch?v=HK441NNdZ8w]
+[youtube https://www.youtube.com/watch?v=Cn-JQBMw04E]
 
 This plugin is perfect for store owners or developers who need to clean out sample data or reset their store. Whether you're launching a new store or just organizing your catalog, this tool offers a fast, reliable way to manage product inventory.
 

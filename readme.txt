@@ -36,10 +36,17 @@ This plugin is perfect for store owners or developers who need to clean out samp
 Enhance your WooCommerce store management with this essential tool for quick and easy product removal. Keep your product catalog clean and organized to deliver the best shopping experience for your customers.
 
 == Screenshots ==
-1. Quickly access the deletion options for bulk product removal.
-2. Confirm actions before deleting products permanently or moving them to the trash.
-3. Easily view and restore trashed products.
-4. You can access the plugin via the Products menu, under the Delete Products submenu.
+1. Quickly navigate to the bulk product deletion interface where you can initiate the process to delete or move products to the trash with ease.
+2. Before moving all products to the trash, the plugin prompts you to confirm the action, ensuring no unintended deletions occur.
+3. Track the deletion process with a progress bar that shows real-time updates as products are moved to the trash.
+4. Once all products have been moved to the trash, a confirmation message appears, verifying the completion of the action.
+5. After products are in the trash, you can either permanently delete them or restore them back to the store with a single click.
+6. The plugin prompts you for confirmation before permanently deleting all products from the trash, adding an extra layer of security.
+7. Monitor the permanent deletion process through a progress bar that provides visual feedback on the operation's progress.
+8. Before restoring all products from the trash, a confirmation prompt ensures you’re fully aware of the action being taken.
+9. The product restoration process is tracked with a progress bar, showing how many products are being restored back into the store.
+10. Use advanced filter options to delete products based on specific criteria such as stock status and product status.
+11. After applying filters, a message is displayed to indicate the number of products found, helping you verify the search results before deletion.
 
 == Contribute ==
 Want to contribute or report an issue? Check out the <a href="https://github.com/hasanchy/delete-all-products">GitHub repository</a> for more information.
@@ -54,7 +61,7 @@ Want to contribute or report an issue? Check out the <a href="https://github.com
 == FAQ ==
 = Can I delete all WooCommerce products at once? =
 
-With Delete All Products for WooCommerce, you can easily bulk delete all products in just a few steps. After installing and activating the plugin, navigate to Products > Delete Products, where you’ll have the option to either move all products to the trash or permanently delete all products already in the trash.
+With Delete All Products for WooCommerce, you can easily bulk delete all products in just a few steps. After installing and activating the plugin, navigate to Products > Delete Products, where you’ll have the option to either move all products to the trash or permanently delete them.
 
 = Can I restore all products after deleting them? =
 

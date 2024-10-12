@@ -65,10 +65,10 @@ const SearchProducts = () => {
             return <ActionButtons filters={filters} total={searchResult} isLoading={isProductsSearching}/>;
         }
         return false;
-    }
-
+    } 
+    
     return (
-        <Card title="Delete by Filter">
+        <Card title="Delete Products By Filters">
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                 <Form
                     name="importSettings"

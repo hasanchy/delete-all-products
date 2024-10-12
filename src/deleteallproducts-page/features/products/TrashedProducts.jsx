@@ -1,15 +1,23 @@
 import React from 'react';
-import { Card, Col, Row, Space } from "antd";
+import { Button, Card, Col, Row, Space, Tooltip } from "antd";
 import { __ } from "@wordpress/i18n";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ActionButtons from './ActionButtons';
+import { fetchProductsStat } from '../../services/apiService';
+import { ReloadOutlined } from '@ant-design/icons';
 
 const TrashedProducts = () => {
 
+    const dispatch = useDispatch();
+
     const { isProductsStatLoading, productsTrash } = useSelector((state) => state.products);
 
+    const handleRefresh = () => {
+        dispatch(fetchProductsStat());
+    }
+
     return (
-        <Card>
+        <Card title="Delete/Restore Products From Trash" extra={<Tooltip placement="topLeft" title={ __( 'Reload', 'delete-all-products' ) } color={'purple'} key={'reload'}><Button type="default" icon={<ReloadOutlined/>} onClick={handleRefresh}></Button></Tooltip>}>
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                 <Row>
                     <Col span={24}>

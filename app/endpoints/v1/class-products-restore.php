@@ -1,6 +1,6 @@
 <?php
 /**
- * Products Endpoint.
+ * Products Restore Endpoint.
  */
 
 namespace DAPRODS\App\Endpoints\V1;
@@ -36,16 +36,27 @@ class ProductsRestore extends Endpoint {
 			$this->get_endpoint(),
 			array(
 				array(
-					'methods'             => 'POST',
+					'methods'             => 'POST', // Use POST for restore functionality
 					'callback'            => array( $this, 'restore_products' ),
 					'permission_callback' => array( $this, 'edit_permission' ),
+					'args'                => array(
+						'stock_status' => array(
+							'description' => 'Filter by stock status (instock, outofstock, onbackorder)',
+							'type'        => 'array',
+							'items'       => array(
+								'type' => 'string',
+								'enum' => array( 'instock', 'outofstock', 'onbackorder' ),
+							),
+							'required'    => false,
+						),
+					),
 				),
 			)
 		);
 	}
 
 	/**
-	 * Handle the request to get products.
+	 * Handle the request to restore products.
 	 *
 	 * @param WP_REST_Request $request The request object.
 	 * @return WP_REST_Response|WP_Error
@@ -58,27 +69,54 @@ class ProductsRestore extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$args  = array(
+		// Get optional parameters
+		$stock_status = $request->get_param( 'stock_status' );
+
+		// Build query arguments dynamically based on provided filters
+		$args = array(
 			'post_type'      => 'product',
 			'post_status'    => 'trash',
 			'posts_per_page' => 10,
 		);
+
+		// Add stock status filter if provided
+		if ( $stock_status ) {
+			$meta_query = array();
+			foreach ( $stock_status as $status ) {
+				$meta_query[] = array(
+					'key'     => '_stock_status',
+					'value'   => $status,
+					'compare' => '=',
+				);
+			}
+			$args['meta_query'] = array(
+				'relation' => 'OR',
+				$meta_query,
+			);
+		}
+
+		// Get the products based on the filtered arguments
 		$posts = get_posts( $args );
 
 		$total_restored = 0;
 		foreach ( $posts as $post ) {
-			$post = array(
-				'ID'          => $post->ID,
-				'post_status' => 'publish',
-			);
-			wp_update_post( $post );
-			++$total_restored;
+			$product = wc_get_product( $post->ID );
+			if ( $product ) {
+				// Restore the product by setting it to 'publish'
+				$product_data = array(
+					'ID'          => $product->get_id(),
+					'post_status' => 'publish',
+				);
+				wp_update_post( $product_data );
+				++$total_restored;
+			}
 		}
 
 		// Prepare response
 		$response = array(
-			'total_restored' => $total_restored,
-			'stat'           => ProductHelper::get_product_stat(),
+			'search_count' => ProductHelper::get_product_count( $stock_status, array( 'trash' ) ),
+			'total'        => $total_restored,
+			'stat'         => ProductHelper::get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );

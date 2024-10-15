@@ -39,13 +39,33 @@ class ProductsDelete extends Endpoint {
 					'methods'             => 'DELETE',
 					'callback'            => array( $this, 'delete_products' ),
 					'permission_callback' => array( $this, 'edit_permission' ),
+					'args'                => array(
+						'stock_status'   => array(
+							'description' => 'Filter by stock status (instock, outofstock, onbackorder)',
+							'type'        => 'array',
+							'items'       => array(
+								'type' => 'string',
+								'enum' => array( 'instock', 'outofstock', 'onbackorder' ),
+							),
+							'required'    => false,
+						),
+						'product_status' => array(
+							'description' => 'Filter by product status (publish, pending, draft, private, trash)',
+							'type'        => 'array',
+							'items'       => array(
+								'type' => 'string',
+								'enum' => array( 'publish', 'pending', 'draft', 'private', 'trash' ),
+							),
+							'required'    => false,
+						),
+					),
 				),
 			)
 		);
 	}
 
 	/**
-	 * Handle the request to get products.
+	 * Handle the request to delete products.
 	 *
 	 * @param WP_REST_Request $request The request object.
 	 * @return WP_REST_Response|WP_Error
@@ -58,24 +78,50 @@ class ProductsDelete extends Endpoint {
 			return new WP_REST_Response( 'Invalid nonce', 403 );
 		}
 
-		$args  = array(
+		// Get optional parameters
+		$stock_status   = $request->get_param( 'stock_status' );
+		$product_status = $request->get_param( 'product_status' );
+
+		// Build query arguments dynamically based on provided filters
+		$args = array(
 			'post_type'      => 'product',
-			'post_status'    => 'trash',
+			'post_status'    => $product_status ? $product_status : array( 'publish', 'pending', 'draft', 'private' ),
 			'posts_per_page' => 10,
 		);
+
+		// Add stock status filter if provided
+		if ( $stock_status ) {
+			$meta_query = array();
+			foreach ( $stock_status as $status ) {
+				$meta_query[] = array(
+					'key'     => '_stock_status',
+					'value'   => $status,
+					'compare' => '=',
+				);
+			}
+			$args['meta_query'] = array(
+				'relation' => 'OR',
+				$meta_query,
+			);
+		}
+
+		// Get the products based on the filtered arguments
 		$posts = get_posts( $args );
 
 		$total_deleted = 0;
 		foreach ( $posts as $post ) {
 			$product = wc_get_product( $post->ID );
-			$product->delete( true );
-			++$total_deleted;
+			if ( $product ) {
+				$product->delete( true );
+				++$total_deleted;
+			}
 		}
 
 		// Prepare response
 		$response = array(
-			'total_deleted' => $total_deleted,
-			'stat'          => ProductHelper::get_product_stat(),
+			'search_count' => ProductHelper::get_product_count( $stock_status, $product_status ),
+			'total'        => $total_deleted,
+			'stat'         => ProductHelper::get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );

@@ -10,8 +10,9 @@ import TrashedProducts from '../../features/products/TrashedProducts';
 const MenuTabs = () => {
 
 	const { activeTab  } = useSelector((state) => state.menuTabs);
-	const { isProductsStatLoading, productsAll, productsTrash } = useSelector((state) => state.products);
+	const { isProductsStatLoading, isTrashingInProgress, isRestoringInProgress, isDeletingInProgress, productsAll, productsTrash } = useSelector((state) => state.products);
 	const dispatch = useDispatch();
+	const isOperationInProgress = (isTrashingInProgress || isRestoringInProgress || isDeletingInProgress) ? true : false;
 
 	let allLabel = ( isProductsStatLoading ) ? <>All <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `All (${productsAll})`;
 	let trashLabel = ( isProductsStatLoading ) ? <>Trash <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `Trash (${productsTrash})`;
@@ -20,13 +21,13 @@ const MenuTabs = () => {
 			key: 'all',
 			label: __( allLabel, 'delete-all-products' ),
 			children: <AllProducts />,
-			icon: <ProductOutlined />
+			icon: isOperationInProgress ? <Spin size="small"/> : <ProductOutlined />
 		},
 		{
 			key: 'trash',
 			label: __( trashLabel, 'delete-all-products' ),
 			children: <TrashedProducts/>,
-			icon: <DeleteOutlined />
+			icon: isOperationInProgress ? <Spin size="small"/> : <DeleteOutlined />
 		}
 	];
 

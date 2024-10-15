@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { deleteProducts, fetchProductsStat, restoreProducts, trashProducts } from '../../services/apiService';
+import { deleteProducts, fetchProductsStat, searchProducts, restoreProducts, trashProducts } from '../../services/apiService';
 
 const initialState = {
 	productsScreen: 'default',
 	isProductsStatLoading: false,
+	isProductsSearching: false,
 	isTrashingInProgress: false,
 	isRestoringInProgress: false,
 	isDeletingInProgress: false,
@@ -69,7 +70,16 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(deleteProducts.rejected, (state, action) => {
 			state.isDeletingInProgress = false;
-		})
+		}),
+		builder.addCase(searchProducts.pending, (state) => {
+			state.isProductsSearching = true;
+		}),
+		builder.addCase(searchProducts.fulfilled, (state, action) => {
+            state.isProductsSearching = false;
+		}),
+		builder.addCase(searchProducts.rejected, (state, action) => {
+			state.isProductsSearching = false;
+        })
 	}
 })
 

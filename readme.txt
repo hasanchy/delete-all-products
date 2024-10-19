@@ -54,12 +54,12 @@ Want to contribute or report an issue? Check out the <a href="https://github.com
 == Installation ==
 1. Go to your WordPress dashboard.
 2. Navigate to "Plugins" > "Add New".
-3. Search for "Delete All Products by ThemeDyno".
+3. Search for "Delete All Products".
 4. Install and activate the plugin.
 5. Navigate to "Products" > "Delete Products" to start removing products.
 
 == FAQ ==
-= Can I delete all WooCommerce products at once? =
+= How do I delete all WooCommerce products at once? =
 
 With Delete All Products for WooCommerce, you can easily bulk delete all products in just a few steps. After installing and activating the plugin, navigate to Products > Delete Products, where you’ll have the option to either move all products to the trash or permanently delete them.
 

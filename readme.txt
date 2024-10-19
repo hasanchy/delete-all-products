@@ -54,7 +54,7 @@ Want to contribute or report an issue? Check out the <a href="https://github.com
 == Installation ==
 1. Go to your WordPress dashboard.
 2. Navigate to "Plugins" > "Add New".
-3. Search for "Delete All Products by ThemeDyno".
+3. Search for "Delete All Products".
 4. Install and activate the plugin.
 5. Navigate to "Products" > "Delete Products" to start removing products.
 

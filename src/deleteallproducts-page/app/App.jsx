@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { __ } from '@wordpress/i18n';
 import Header from "../components/header/Header";
 import MenuTabs from "../components/menu-tabs/MenuTabs";
-import { fetchProductsStat } from "../services/apiService";
+import { fetchProductsStat, fetchSettings } from "../services/apiService";
 
 const App = () => {
 
@@ -12,6 +12,7 @@ const App = () => {
 
 	useEffect(() => {
 		dispatch(fetchProductsStat());
+		dispatch(fetchSettings());
 	}, [])
 
 	return (

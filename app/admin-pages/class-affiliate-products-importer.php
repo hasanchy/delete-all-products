@@ -137,6 +137,7 @@ class AffiliateProductsImporter extends Base {
 					'productsTrash'   => rest_url() . 'delete-all-products/v1/products/trash',
 					'productsDelete'  => rest_url() . 'delete-all-products/v1/products/delete',
 					'productsRestore' => rest_url() . 'delete-all-products/v1/products/restore',
+					'settings' => rest_url() . 'delete-all-products/v1/settings',
 				),
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),

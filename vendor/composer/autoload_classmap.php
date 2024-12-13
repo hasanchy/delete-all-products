@@ -13,6 +13,7 @@ return array(
     'DAPRODS\\App\\Endpoints\\V1\\ProductsSearch' => $baseDir . '/app/endpoints/v1/class-products-search.php',
     'DAPRODS\\App\\Endpoints\\V1\\ProductsStat' => $baseDir . '/app/endpoints/v1/class-products-stat.php',
     'DAPRODS\\App\\Endpoints\\V1\\ProductsTrash' => $baseDir . '/app/endpoints/v1/class-products-trash.php',
+    'DAPRODS\\App\\Endpoints\\V1\\Settings' => $baseDir . '/app/endpoints/v1/class-settings.php',
     'DAPRODS\\Core\\Base' => $baseDir . '/core/class-base.php',
     'DAPRODS\\Core\\Endpoint' => $baseDir . '/core/class-endpoint.php',
     'DAPRODS\\Core\\Loader' => $baseDir . '/core/class-loader.php',

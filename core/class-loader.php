@@ -91,5 +91,6 @@ final class Loader extends Base {
 		App\Endpoints\V1\ProductsTrash::instance();
 		App\Endpoints\V1\ProductsRestore::instance();
 		App\Endpoints\V1\ProductsDelete::instance();
+		App\Endpoints\V1\Settings::instance();
 	}
 }

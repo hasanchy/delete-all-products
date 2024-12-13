@@ -105,6 +105,8 @@ class ProductsDelete extends Endpoint {
 			);
 		}
 
+        $delete_product_images = get_option( 'daprods_delete_product_images' );
+
 		// Get the products based on the filtered arguments
 		$posts = get_posts( $args );
 
@@ -112,6 +114,29 @@ class ProductsDelete extends Endpoint {
 		foreach ( $posts as $post ) {
 			$product = wc_get_product( $post->ID );
 			if ( $product ) {
+                // Delete product images if setting is enabled
+                if ( 'yes' === $delete_product_images ) {
+                    // Get product image IDs
+                    $image_ids = array();
+                    
+                    // Get featured image
+                    $thumbnail_id = $product->get_image_id();
+                    if ( $thumbnail_id ) {
+                        $image_ids[] = $thumbnail_id;
+                    }
+                    
+                    // Get gallery images
+                    $gallery_ids = $product->get_gallery_image_ids();
+                    if ( ! empty( $gallery_ids ) ) {
+                        $image_ids = array_merge( $image_ids, $gallery_ids );
+                    }
+                    
+                    // Delete all associated images
+                    foreach ( $image_ids as $image_id ) {
+                        wp_delete_attachment( $image_id, true );
+                    }
+                }
+
 				$product->delete( true );
 				++$total_deleted;
 			}

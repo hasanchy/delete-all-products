@@ -2,7 +2,7 @@
 Contributors: hasanchowdhury, themedyno 
 Tags: delete products, bulk delete products, remove products, WooCommerce products, product management
 Requires at least: 5.2
-Tested up to: 6.6.2
+Tested up to: 6.7.1
 Requires PHP: 7.2.0
 Stable tag: 1.4.0
 License: GPLv2 or later

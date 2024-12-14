@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'DAPRODS\\App\\Admin_Pages\\AffiliateProductsImporter' => $baseDir . '/app/admin-pages/class-affiliate-products-importer.php',
+    'DAPRODS\\App\\Admin_Pages\\DeleteAllProductsAdmin' => $baseDir . '/app/admin-pages/class-delete-all-products-admin.php',
     'DAPRODS\\App\\Endpoints\\V1\\ProductsDelete' => $baseDir . '/app/endpoints/v1/class-products-delete.php',
     'DAPRODS\\App\\Endpoints\\V1\\ProductsRestore' => $baseDir . '/app/endpoints/v1/class-products-restore.php',
     'DAPRODS\\App\\Endpoints\\V1\\ProductsSearch' => $baseDir . '/app/endpoints/v1/class-products-search.php',

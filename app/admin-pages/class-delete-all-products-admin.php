@@ -1,6 +1,6 @@
 <?php
 /**
- * Affiliate Products Import block.
+ * Delete All Products Admin block.
  */
 
 namespace DAPRODS\App\Admin_Pages;
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use DAPRODS\Core\Base;
 
-class AffiliateProductsImporter extends Base {
+class DeleteAllProductsAdmin extends Base {
 	/**
 	 * The page title.
 	 *

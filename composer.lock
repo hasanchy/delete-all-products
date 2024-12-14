@@ -4,9 +4,73 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8f201220fe5b432d722834298eefde5",
+    "content-hash": "69ce7bd13c30d731a1c4a87ac76429a8",
     "packages": [],
     "packages-dev": [
+        {
+            "name": "coenjacobs/mozart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/coenjacobs/mozart.git",
+                "reference": "fb98a64cac0330b738b84e724de70c8422735b53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/coenjacobs/mozart/zipball/fb98a64cac0330b738b84e724de70c8422735b53",
+                "reference": "fb98a64cac0330b738b84e724de70c8422735b53",
+                "shasum": ""
+            },
+            "require": {
+                "netresearch/jsonmapper": "^4.4",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+                "league/flysystem": "^2.5",
+                "mheap/phpunit-github-actions-printer": "^1.5",
+                "phpcompatibility/php-compatibility": "dev-develop",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpunit/phpunit": "^9.6",
+                "squizlabs/php_codesniffer": "^3.10",
+                "symfony/console": "^5.4",
+                "symfony/finder": "^5.4"
+            },
+            "default-branch": true,
+            "bin": [
+                "bin/mozart"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CoenJacobs\\Mozart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Coen Jacobs",
+                    "email": "coenjacobs@gmail.com"
+                }
+            ],
+            "description": "Composes all dependencies as a package inside a WordPress plugin",
+            "support": {
+                "issues": "https://github.com/coenjacobs/mozart/issues",
+                "source": "https://github.com/coenjacobs/mozart/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/coenjacobs",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-11T15:28:42+00:00"
+        },
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
             "version": "v1.0.0",
@@ -84,6 +148,57 @@
                 "source": "https://github.com/PHPCSStandards/composer-installer"
             },
             "time": "2023-01-05T11:28:13+00:00"
+        },
+        {
+            "name": "netresearch/jsonmapper",
+            "version": "v4.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweiske/jsonmapper.git",
+                "reference": "8e76efb98ee8b6afc54687045e1b8dba55ac76e5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweiske/jsonmapper/zipball/8e76efb98ee8b6afc54687045e1b8dba55ac76e5",
+                "reference": "8e76efb98ee8b6afc54687045e1b8dba55ac76e5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-pcre": "*",
+                "ext-reflection": "*",
+                "ext-spl": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~7.5 || ~8.0 || ~9.0 || ~10.0",
+                "squizlabs/php_codesniffer": "~3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JsonMapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Weiske",
+                    "email": "cweiske@cweiske.de",
+                    "homepage": "http://github.com/cweiske/jsonmapper/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Map nested JSON structures onto PHP classes",
+            "support": {
+                "email": "cweiske@cweiske.de",
+                "issues": "https://github.com/cweiske/jsonmapper/issues",
+                "source": "https://github.com/cweiske/jsonmapper/tree/v4.5.0"
+            },
+            "time": "2024-09-08T10:13:13+00:00"
         },
         {
             "name": "phpcompatibility/php-compatibility",
@@ -295,12 +410,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSExtra.git",
-                "reference": "6f99815752a5b27f0e6e751777f305cb8eb3fe66"
+                "reference": "31ef149a1ee85ec0d355e58418d78d927e89d185"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/6f99815752a5b27f0e6e751777f305cb8eb3fe66",
-                "reference": "6f99815752a5b27f0e6e751777f305cb8eb3fe66",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSExtra/zipball/31ef149a1ee85ec0d355e58418d78d927e89d185",
+                "reference": "31ef149a1ee85ec0d355e58418d78d927e89d185",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +481,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-10-03T17:43:50+00:00"
+            "time": "2024-11-11T18:03:33+00:00"
         },
         {
             "name": "phpcsstandards/phpcsutils",
@@ -374,12 +489,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHPCSUtils.git",
-                "reference": "b3d58ca0d6a3f19eb9e187375d3a4af1ef498d12"
+                "reference": "33dd7776e8a78ddaad1500899ad8c536a7764d4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/b3d58ca0d6a3f19eb9e187375d3a4af1ef498d12",
-                "reference": "b3d58ca0d6a3f19eb9e187375d3a4af1ef498d12",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHPCSUtils/zipball/33dd7776e8a78ddaad1500899ad8c536a7764d4a",
+                "reference": "33dd7776e8a78ddaad1500899ad8c536a7764d4a",
                 "shasum": ""
             },
             "require": {
@@ -455,7 +570,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-10-07T04:24:02+00:00"
+            "time": "2024-12-12T07:44:32+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -463,12 +578,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "2e3c58b0f4936bc1f83d4c5783248acc589fe858"
+                "reference": "e8edff7e7975fbf927cf51999d4332c1fc561774"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/2e3c58b0f4936bc1f83d4c5783248acc589fe858",
-                "reference": "2e3c58b0f4936bc1f83d4c5783248acc589fe858",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/e8edff7e7975fbf927cf51999d4332c1fc561774",
+                "reference": "e8edff7e7975fbf927cf51999d4332c1fc561774",
                 "shasum": ""
             },
             "require": {
@@ -536,7 +651,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-10-07T04:54:41+00:00"
+            "time": "2024-12-14T08:03:16+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -607,12 +722,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "coenjacobs/mozart": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.4"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

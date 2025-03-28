@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Checkbox, Form, Space } from "antd";
+import { Alert, Button, Card, Checkbox, Col, Form, Image, Row, Space } from "antd";
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
 import { searchProducts } from '../../services/apiService';
@@ -70,100 +70,33 @@ const SearchProducts = () => {
     return (
         <Card title="Delete Products By Filters">
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
-                <Form
-                    name="importSettings"
-                    form={form}
-                    labelCol={{
-                        span: 4,
-                    }}
-                    wrapperCol={{
-                        span: 20,
-                    }}
-                    style={{
-                        maxWidth: 900,
-                    }}
-                    initialValues={{
-                        remember: true,
-                    }}
-                    onFinish={onFinish}
-                    autoComplete="off"
-                    disabled={false}
-                >
-                    <Form.Item
-                        label="Stock Status"
-                        name="stockStatus"
-                    >
-                        <Space
-                            direction="vertical"
-                            size="small"
-                            style={{
-                                display: 'flex',
-                            }}
+                <Alert
+                    description={<>{__( 'Product deletion with filters is available in the', 'delete-all-products' )} <b><a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>{__( 'Pro version', 'delete-all-products' )}</a></b> {__( 'of the plugin.', 'delete-all-products' )}</>}
+                    type="info"
+                />
+                <Row>
+                    <Col span={16} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>
+                            <Image
+                                preview={false}
+                                src={window.daprodsDeleteAllProducts.filtersImageSrc} 
+                                alt="Product Cleaner" style={{ width: '100%', border: '1px solid #000', borderRadius: '10px' }}
+                                
+                            /> 
+                        </a>
+                    </Col>
+                    <Col span={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Button
+                            key="link"
+                            href="https://woocommerce.com/products/product-cleaner-for-woocommerce/"
+                            type="primary"
+                            style={{ marginRight: '10px' }}
+                            target='_blank'
                         >
-                            <Checkbox
-                                onChange={(e) => handleCheckboxChange('stock_status', 'instock', e.target.checked)}
-                            >
-                                In stock
-                            </Checkbox>
-                            <Checkbox
-                                onChange={(e) => handleCheckboxChange('stock_status', 'outofstock', e.target.checked)}
-                            >
-                                Out of stock
-                            </Checkbox>
-                            <Checkbox
-                                onChange={(e) => handleCheckboxChange('stock_status', 'onbackorder', e.target.checked)}
-                            >
-                                On backorder
-                            </Checkbox>
-                        </Space>        
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Product Status"
-                        name="productStatus"
-                    >
-                        <Space
-                            direction="vertical"
-                            size="small"
-                            style={{
-                                display: 'flex',
-                            }}
-                        >
-                            <Checkbox
-                                onChange={(e) => handleCheckboxChange('product_status', 'publish', e.target.checked)}
-                            >
-                                Publish
-                            </Checkbox>
-                            <Checkbox
-                                onChange={(e) => handleCheckboxChange('product_status', 'pending', e.target.checked)}
-                            >
-                                Pending Review
-                            </Checkbox>
-                            <Checkbox
-                                onChange={(e) => handleCheckboxChange('product_status', 'draft', e.target.checked)}
-                            >
-                                Draft
-                            </Checkbox>
-                            <Checkbox
-                                onChange={(e) => handleCheckboxChange('product_status', 'private', e.target.checked)}
-                            >
-                                Private
-                            </Checkbox>
-                        </Space>        
-                    </Form.Item>
-
-                    <Form.Item
-                        wrapperCol={{
-                            offset: 4,
-                            span: 20,
-                        }}
-                    >
-                        <Button type="primary" htmlType="submit" loading={isProductsSearching} disabled={ JSON.stringify(initialFiltersState) === JSON.stringify(filters) }>
-                            { __( 'Search', 'delete-all-products' ) }
+                            { __( 'Upgrade Now' ) }
                         </Button>
-                    </Form.Item>
-                </Form>
-                {renderDeleteButtons()}
+                    </Col>
+                </Row>
             </Space>
         </Card>
     );

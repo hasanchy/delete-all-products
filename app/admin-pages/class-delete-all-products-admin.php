@@ -139,6 +139,7 @@ class DeleteAllProductsAdmin extends Base {
 					'productsRestore' => rest_url() . 'delete-all-products/v1/products/restore',
 					'settings' => rest_url() . 'delete-all-products/v1/settings',
 				),
+				'filtersImageSrc' => DAPRODS_ASSETS_URL . '/images/filters.png',
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),
 		);

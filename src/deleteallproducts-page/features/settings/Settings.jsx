@@ -1,15 +1,18 @@
-import { Button, Card, Form, message, Switch } from 'antd';
-import React, {useEffect} from 'react';
+import { Button, Card, Form, message, Switch, Radio } from 'antd';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDeleteProductImages, setSettingsToastMessage } from './settingsSlice';
+import { setDeleteAllProductsType, setDeleteProductImages, setSettingsToastMessage } from './settingsSlice';
 import { saveSettings } from '../../services/apiService';
 import { __ } from '@wordpress/i18n';
+import ProModal from '../../components/modal/ProModal';
 
 const Settings = () => {
 	const dispatch = useDispatch();
-	const { deleteProductImages, isSettingsSaving, isSettingsLoading, settingsToastMessage } = useSelector((state) => state.settings);
+	const { deleteProductImages, deleteAllProductsType, isSettingsSaving, isSettingsLoading, settingsToastMessage } = useSelector((state) => state.settings);
 
 	const [form] = Form.useForm();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
 		if(settingsToastMessage){
@@ -21,20 +24,56 @@ const Settings = () => {
 			dispatch(setSettingsToastMessage(''));
 		}
 	}, [settingsToastMessage])
-
+    
     form.setFieldsValue({ 
+        deleteAllProductsType,
         deleteProductImages
     });
 
     const onFinish = () => {
         const data = {
-            'delete_product_images': deleteProductImages ? 'yes' : 'no',
+            'delete_all_products_type': deleteAllProductsType,
+            'delete_product_images': deleteProductImages ? 'yes' : 'no'
         }
         dispatch(saveSettings(data));
     };
 
+    const handleDeleteAllProductsType = (e) => {
+        dispatch(setDeleteAllProductsType('all'));
+
+        if(e.target.value === 'filter'){
+            setIsModalOpen(true);
+        }
+    }
+
     const handleDeleteProductImages = (value) => {
-        dispatch(setDeleteProductImages(value));
+        dispatch(setDeleteProductImages(false));
+
+        if(value){
+            setIsModalOpen(true);
+        }
+    }
+
+    const options = [
+        {
+          label: __( 'Filters (Pro)', 'product-cleaner' ),
+          value: 'filter',
+        },
+        {
+          label: __( 'All', 'product-cleaner' ),
+          value: 'all',
+        },
+    ];
+
+    const renderProModal = () => {
+        if(isModalOpen){
+            return <ProModal onCancel={handleCancel}/>
+        }
+        return null;
+    }
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
     }
 
 	return (
@@ -56,15 +95,26 @@ const Settings = () => {
                 }}
                 onFinish={onFinish}
                 autoComplete="off"
-                disabled={isSettingsLoading}
             >
                 <Form.Item
-                    label={ __('Delete product images on permanent deletion', 'delete-all-products' ) }
+                    label={ __('Delete/Trash all products using', 'product-cleaner' ) }
+                    name="deleteAllProductsType"
+                >
+                    <Radio.Group
+                        options={options}
+                        defaultValue={deleteAllProductsType}
+                        optionType="button"
+                        buttonStyle="solid"
+                        onChange={handleDeleteAllProductsType}
+                    />
+                </Form.Item>
+                <Form.Item
+                    label={ __('Delete product images on permanent deletion (Pro)', 'product-cleaner' ) }
                     name="deleteProductImages"
                 >
                     <Switch
-                        checkedChildren={__('Yes', 'delete-all-products')}
-                        unCheckedChildren={__('No', 'delete-all-products')}
+                        checkedChildren={__('Yes', 'product-cleaner')}
+                        unCheckedChildren={__('No', 'product-cleaner')}
                         defaultChecked={deleteProductImages}
                         onChange={handleDeleteProductImages}
                     />
@@ -75,11 +125,12 @@ const Settings = () => {
                         span: 14,
                     }}
                 >
-                    <Button type="primary" htmlType="submit" loading={isSettingsSaving}>
-                        { __('Submit', 'delete-all-products' ) }
+                    <Button type="primary" htmlType="submit" disabled={true}>
+                        { __('Submit', 'product-cleaner' ) }
                     </Button>
                 </Form.Item>
             </Form>
+            {renderProModal()}
         </Card>
 	);
 }

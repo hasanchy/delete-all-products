@@ -2,7 +2,7 @@
 Contributors: hasanchowdhury, themedyno 
 Tags: delete products, bulk delete products, remove products, WooCommerce products, product management
 Requires at least: 5.2
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 Requires PHP: 7.2.0
 Stable tag: 1.4.0
 License: GPLv2 or later
@@ -21,15 +21,13 @@ This plugin is perfect for store owners or developers who need to clean out samp
 
 * **One-Click Bulk Deletion:** Remove all WooCommerce products with a single click.
 * **Move to Trash or Delete Permanently:** Choose whether to delete products permanently or move them to the trash for future retrieval.
-* **Filter by Stock and Product Status:** Easily filter products by inventory stock status (e.g., "Out of Stock") and product status (e.g., "Draft") before deciding to trash or delete them.
 * **Optimize Store Performance:** Clear out unnecessary products to improve WooCommerce store speed and performance.
 * **Great for Testing and Setup:** Perfect for developers or new store setups to quickly remove demo products.
 
 == Key Features: ==
 
 * Easily delete all WooCommerce products in bulk.
-* Option to move products to the trash for future retrieval or permanently delete them.
-* Filter products by inventory stock and product status before deletion.
+* Option to move all products to the trash for future retrieval or permanently delete them.
 * Simple, intuitive interface for fast product management.
 * Ideal for store setups, testing, and regular maintenance.
 
@@ -45,8 +43,6 @@ Enhance your WooCommerce store management with this essential tool for quick and
 7. Monitor the permanent deletion process through a progress bar that provides visual feedback on the operation's progress.
 8. Before restoring all products from the trash, a confirmation prompt ensures you’re fully aware of the action being taken.
 9. The product restoration process is tracked with a progress bar, showing how many products are being restored back into the store.
-10. Use advanced filter options to delete products based on specific criteria such as stock status and product status.
-11. After applying filters, a message is displayed to indicate the number of products found, helping you verify the search results before deletion.
 
 == Contribute ==
 Want to contribute or report an issue? Check out the <a href="https://github.com/hasanchy/delete-all-products">GitHub repository</a> for more information.

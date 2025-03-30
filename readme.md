@@ -10,8 +10,3 @@ This essential plugin simplifies the task of bulk product deletion, enhancing th
 * Option to move products to trash or delete permanently.
 * Ideal for store setup and testing phases with sample product data.
 * Effortlessly retrieve products from the trash with a single click.
-
-#### How to build
-- `npm install`
-- `npm run start #for development`
-- `npm run build #for production build`

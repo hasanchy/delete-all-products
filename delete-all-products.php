@@ -7,7 +7,7 @@
  * Description:     Efficiently delete all WooCommerce products in just a few clicks
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         1.4.0
+ * Version:         1.5.0
  * Text Domain:     delete-all-products
  * Domain Path:     /languages
  *

@@ -105,8 +105,6 @@ class ProductsDelete extends Endpoint {
 			);
 		}
 
-        $delete_product_images = get_option( 'daprods_delete_product_images' );
-
 		// Get the products based on the filtered arguments
 		$posts = get_posts( $args );
 

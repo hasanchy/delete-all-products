@@ -2,13 +2,12 @@ import { Button, Card, Form, message, Switch, Radio } from 'antd';
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDeleteAllProductsType, setDeleteProductImages, setSettingsToastMessage } from './settingsSlice';
-import { saveSettings } from '../../services/apiService';
 import { __ } from '@wordpress/i18n';
 import ProModal from '../../components/modal/ProModal';
 
 const Settings = () => {
 	const dispatch = useDispatch();
-	const { deleteProductImages, deleteAllProductsType, isSettingsSaving, isSettingsLoading, settingsToastMessage } = useSelector((state) => state.settings);
+	const { deleteProductImages, deleteAllProductsType, settingsToastMessage } = useSelector((state) => state.settings);
 
 	const [form] = Form.useForm();
 
@@ -29,14 +28,6 @@ const Settings = () => {
         deleteAllProductsType,
         deleteProductImages
     });
-
-    const onFinish = () => {
-        const data = {
-            'delete_all_products_type': deleteAllProductsType,
-            'delete_product_images': deleteProductImages ? 'yes' : 'no'
-        }
-        dispatch(saveSettings(data));
-    };
 
     const handleDeleteAllProductsType = (e) => {
         dispatch(setDeleteAllProductsType('all'));
@@ -93,7 +84,6 @@ const Settings = () => {
                 initialValues={{
                     remember: true,
                 }}
-                onFinish={onFinish}
                 autoComplete="off"
             >
                 <Form.Item

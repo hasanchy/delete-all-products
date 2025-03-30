@@ -40,6 +40,7 @@ const SearchProducts = () => {
                                     type="primary"
                                     style={{ marginTop: '20px' }}
                                     target='_blank'
+                                    size='large'
                                 >
                                     { __( 'Upgrade Now' ) }
                                 </Button>

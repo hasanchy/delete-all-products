@@ -15,6 +15,7 @@ const Header = () => {
                     key="link"
                     href="https://woocommerce.com/products/product-cleaner-for-woocommerce/"
                     type="primary"
+                    target='_blank'
                     style={{ marginRight: '10px' }}
                 >
                     { __( 'Upgrade to Pro' ) }

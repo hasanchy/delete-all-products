@@ -13,8 +13,6 @@ Easily delete all WooCommerce products permanently or move them to the trash in 
 == Description ==
 Need to clear out your WooCommerce store quickly? **Delete All Products for WooCommerce** is the ideal plugin for fast, bulk removal of all products. With one click, you can either move products to the trash for future recovery or delete them permanently.
 
-[youtube https://www.youtube.com/watch?v=Cn-JQBMw04E]
-
 This plugin is perfect for store owners or developers who need to clean out sample data or reset their store. Whether you're launching a new store or just organizing your catalog, this tool offers a fast, reliable way to manage product inventory.
 
 == Why Choose Delete All Products for WooCommerce? ==
@@ -24,14 +22,24 @@ This plugin is perfect for store owners or developers who need to clean out samp
 * **Optimize Store Performance:** Clear out unnecessary products to improve WooCommerce store speed and performance.
 * **Great for Testing and Setup:** Perfect for developers or new store setups to quickly remove demo products.
 
+Enhance your WooCommerce store management with this essential tool for quick and easy product removal. Keep your product catalog clean and organized to deliver the best shopping experience for your customers.
+
+### Upgrade to Product Cleaner for WooCommerce for Even More Power 🚀 ([Pro Feature ⭐](https://woocommerce.com/products/product-cleaner-for-woocommerce/))
+
+With Product Cleaner for WooCommerce, you can effortlessly filter, delete, or trash WooCommerce products in bulk while tracking progress in real time for a seamless cleanup experience.
+
+[youtube https://www.youtube.com/watch?v=9115VKz_sFM]
+
 == Key Features: ==
 
+* Delete products with or without filters
 * Easily delete all WooCommerce products in bulk.
 * Option to move all products to the trash for future retrieval or permanently delete them.
 * Simple, intuitive interface for fast product management.
 * Ideal for store setups, testing, and regular maintenance.
-
-Enhance your WooCommerce store management with this essential tool for quick and easy product removal. Keep your product catalog clean and organized to deliver the best shopping experience for your customers.
+* Remove associated images when permanently deleting products.
+* Preview selected products before deletion.
+* Track progress in real-time with live updates.
 
 == Screenshots ==
 1. Quickly navigate to the bulk product deletion interface where you can initiate the process to delete or move products to the trash with ease.

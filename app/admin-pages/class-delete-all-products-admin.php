@@ -1,6 +1,6 @@
 <?php
 /**
- * Affiliate Products Import block.
+ * Delete All Products Admin block.
  */
 
 namespace DAPRODS\App\Admin_Pages;
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use DAPRODS\Core\Base;
 
-class AffiliateProductsImporter extends Base {
+class DeleteAllProductsAdmin extends Base {
 	/**
 	 * The page title.
 	 *
@@ -137,7 +137,9 @@ class AffiliateProductsImporter extends Base {
 					'productsTrash'   => rest_url() . 'delete-all-products/v1/products/trash',
 					'productsDelete'  => rest_url() . 'delete-all-products/v1/products/delete',
 					'productsRestore' => rest_url() . 'delete-all-products/v1/products/restore',
+					'settings' => rest_url() . 'delete-all-products/v1/settings',
 				),
+				'filtersImageSrc' => DAPRODS_ASSETS_URL . '/images/filters.png',
 				'restNonce'      => wp_create_nonce( 'wp_rest' ),
 			),
 		);

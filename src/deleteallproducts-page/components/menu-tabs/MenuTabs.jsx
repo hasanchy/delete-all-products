@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Tabs, ConfigProvider, Spin } from 'antd';
-import { ProductOutlined, DeleteOutlined, LoadingOutlined } from '@ant-design/icons';
+import { ProductOutlined, DeleteOutlined, SettingOutlined, LoadingOutlined } from '@ant-design/icons';
 import { __ } from '@wordpress/i18n';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveTab } from './manuTabsSlice';
 import AllProducts from '../../features/products/AllProducts';
 import TrashedProducts from '../../features/products/TrashedProducts';
+import Settings from '../../features/settings/Settings';
 
 const MenuTabs = () => {
 
@@ -28,6 +29,12 @@ const MenuTabs = () => {
 			label: __( trashLabel, 'delete-all-products' ),
 			children: <TrashedProducts/>,
 			icon: isOperationInProgress ? <Spin size="small"/> : <DeleteOutlined />
+		},
+		{
+			key: 'settings',
+			label: __( 'Settings', 'delete-all-products' ),
+			children: <Settings/>,
+			icon: <SettingOutlined />
 		}
 	];
 

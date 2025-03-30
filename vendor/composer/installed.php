@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '26bdc8f4c13801df9c909df9e9d75a49f670cc97',
+        'pretty_version' => '1.4.0.x-dev',
+        'version' => '1.4.0.9999999-dev',
+        'reference' => '62eb71dd460b8116033f4f46061cfdf188c7991e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,13 +11,24 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '26bdc8f4c13801df9c909df9e9d75a49f670cc97',
+            'pretty_version' => '1.4.0.x-dev',
+            'version' => '1.4.0.9999999-dev',
+            'reference' => '62eb71dd460b8116033f4f46061cfdf188c7991e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'coenjacobs/mozart' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'fb98a64cac0330b738b84e724de70c8422735b53',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../coenjacobs/mozart',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => true,
         ),
         'dealerdirect/phpcodesniffer-composer-installer' => array(
             'pretty_version' => 'v1.0.0',
@@ -25,6 +36,15 @@
             'reference' => '4be43904336affa5c2f70744a348312336afd0da',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../dealerdirect/phpcodesniffer-composer-installer',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'netresearch/jsonmapper' => array(
+            'pretty_version' => 'v4.5.0',
+            'version' => '4.5.0.0',
+            'reference' => '8e76efb98ee8b6afc54687045e1b8dba55ac76e5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../netresearch/jsonmapper',
             'aliases' => array(),
             'dev_requirement' => true,
         ),
@@ -47,9 +67,9 @@
             'dev_requirement' => true,
         ),
         'phpcompatibility/phpcompatibility-wp' => array(
-            'pretty_version' => '2.1.5',
-            'version' => '2.1.5.0',
-            'reference' => '01c1ff2704a58e46f0cb1ca9d06aee07b3589082',
+            'pretty_version' => '2.1.6',
+            'version' => '2.1.6.0',
+            'reference' => '80ccb1a7640995edf1b87a4409fa584cd5869469',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcompatibility/phpcompatibility-wp',
             'aliases' => array(),
@@ -58,7 +78,7 @@
         'phpcsstandards/phpcsextra' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '6f99815752a5b27f0e6e751777f305cb8eb3fe66',
+            'reference' => 'c3c5741543bc67af3922fc5565ff7d2f02f721b4',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsextra',
             'aliases' => array(
@@ -69,7 +89,7 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'b3d58ca0d6a3f19eb9e187375d3a4af1ef498d12',
+            'reference' => 'd4f086b6aab7d911cb3232569b3b2880ad1d184e',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(
@@ -80,7 +100,7 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '2e3c58b0f4936bc1f83d4c5783248acc589fe858',
+            'reference' => '615e25a908eacffd6839ccd241e0ed361a606d4f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(

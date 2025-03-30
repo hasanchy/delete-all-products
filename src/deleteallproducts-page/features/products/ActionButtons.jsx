@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Col, Modal, Progress, Row, Space, Alert, Spin } from "antd";
+import { Button, Col, Modal, Progress, Row, Space, Alert, Spin, Typography } from "antd";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
@@ -96,7 +96,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         confirm({
             title: 'Delete Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: <>Are you sure you want to permanently delete <b>{searchResult}</b> {pluralize('product', searchResult)}{trashMessage}?</>,
+            content: <Space direction="vertical" size="large" style={{ display: 'flex' }}><div>Are you sure you want to permanently delete <b>{searchResult}</b> {pluralize('product', searchResult)}{trashMessage}?</div><div> <Typography.Text type='secondary'>Want to delete images too? <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>Upgrade to Pro!</a></Typography.Text></div></Space>,
             okText: 'Yes',
             okButtonProps: {
                 danger: true,

@@ -7,7 +7,7 @@
  * Description:     Efficiently delete all WooCommerce products in just a few clicks
  * Author:          ThemeDyno
  * Author URI:      https://themedyno.com/
- * Version:         1.3.0
+ * Version:         1.5.0
  * Text Domain:     delete-all-products
  * Domain Path:     /languages
  *
@@ -59,23 +59,23 @@ if ( ! defined( 'DAPRODS_ASSETS_URL' ) ) {
 }
 
 /**
- * DAPRODS_AffiliateImporter class.
+ * DAPRODS_DeleteAllProductsHandler class.
  */
-class DAPRODS_AffiliateImporter {
+class DAPRODS_DeleteAllProductsHandler {
 
 	/**
 	 * Holds the class instance.
 	 *
-	 * @var DAPRODS_AffiliateImporter $instance
+	 * @var DAPRODS_DeleteAllProductsHandler $instance
 	 */
 	private static $instance = null;
 
 	/**
 	 * Return an instance of the class
 	 *
-	 * Return an instance of the DAPRODS_AffiliateImporter Class.
+	 * Return an instance of the DAPRODS_DeleteAllProductsHandler Class.
 	 *
-	 * @return DAPRODS_AffiliateImporter class instance.
+	 * @return DAPRODS_DeleteAllProductsHandler class instance.
 	 * @since 1.0.0
 	 *
 	 */
@@ -105,6 +105,6 @@ class DAPRODS_AffiliateImporter {
 add_action(
 	'plugins_loaded',
 	function () {
-		DAPRODS_AffiliateImporter::get_instance()->load();
+		DAPRODS_DeleteAllProductsHandler::get_instance()->load();
 	}
 );

@@ -85,11 +85,12 @@ final class Loader extends Base {
 	 * @return void
 	 */
 	private function init() {
-		App\Admin_Pages\AffiliateProductsImporter::instance()->init();
+		App\Admin_Pages\DeleteAllProductsAdmin::instance()->init();
 		App\Endpoints\V1\ProductsStat::instance();
 		App\Endpoints\V1\ProductsSearch::instance();
 		App\Endpoints\V1\ProductsTrash::instance();
 		App\Endpoints\V1\ProductsRestore::instance();
 		App\Endpoints\V1\ProductsDelete::instance();
+		App\Endpoints\V1\Settings::instance();
 	}
 }

@@ -55,7 +55,7 @@ class DeleteAllProductsAdmin extends Base {
 	 */
 	public function init() {
 		if ( is_admin() ) {
-			$this->page_title     = __( 'Delete All Products', 'delete-all-products' );
+			$this->page_title     = 'Delete All Products';
 			$this->assets_version = ! empty( $this->script_data( 'version' ) ) ? $this->script_data( 'version' ) : DAPRODS_VERSION;
 			$this->unique_id      = "daprods_deleteallproducts_main_wrap-{$this->assets_version}";
 

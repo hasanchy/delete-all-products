@@ -41,6 +41,7 @@ return array(
     'PHPCSUtils\\Internal\\NoFileCache' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/Internal/NoFileCache.php',
     'PHPCSUtils\\Internal\\StableCollections' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/Internal/StableCollections.php',
     'PHPCSUtils\\TestUtils\\ConfigDouble' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/TestUtils/ConfigDouble.php',
+    'PHPCSUtils\\TestUtils\\RulesetDouble' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/TestUtils/RulesetDouble.php',
     'PHPCSUtils\\TestUtils\\UtilityMethodTestCase' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/TestUtils/UtilityMethodTestCase.php',
     'PHPCSUtils\\Tokens\\Collections' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/Tokens/Collections.php',
     'PHPCSUtils\\Tokens\\TokenHelper' => $vendorDir . '/phpcsstandards/phpcsutils/PHPCSUtils/Tokens/TokenHelper.php',

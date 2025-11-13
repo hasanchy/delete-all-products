@@ -11,12 +11,12 @@ import Settings from '../../features/settings/Settings';
 const MenuTabs = () => {
 
 	const { activeTab  } = useSelector((state) => state.menuTabs);
-	const { isProductsStatLoading, isTrashingInProgress, isRestoringInProgress, isDeletingInProgress, productsAll, productsTrash } = useSelector((state) => state.products);
+	const { isProductsStatLoading, isTrashingInProgress, isRestoringInProgress, isDeletingInProgress, productsAllCount, productsTrashCount } = useSelector((state) => state.products);
 	const dispatch = useDispatch();
 	const isOperationInProgress = (isTrashingInProgress || isRestoringInProgress || isDeletingInProgress) ? true : false;
 
-	let allLabel = ( isProductsStatLoading ) ? <>All <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `All (${productsAll})`;
-	let trashLabel = ( isProductsStatLoading ) ? <>Trash <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `Trash (${productsTrash})`;
+	let allLabel = ( isProductsStatLoading ) ? <>All <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `All (${productsAllCount})`;
+	let trashLabel = ( isProductsStatLoading ) ? <>Trash <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `Trash (${productsTrashCount})`;
 	const tabItems = [
 		{
 			key: 'all',

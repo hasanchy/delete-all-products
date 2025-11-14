@@ -11,7 +11,7 @@ const AllProducts = () => {
 
     const dispatch = useDispatch();
 
-    const { isProductsStatLoading, productsAll } = useSelector((state) => state.products);
+    const { isProductsStatLoading, productsAllCount } = useSelector((state) => state.products);
 
     const handleRefresh = () => {
         dispatch(fetchProductsStat());
@@ -23,7 +23,7 @@ const AllProducts = () => {
                 <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                     <Row>
                         <Col span={24}>
-                            <ActionButtons filters={{}} total={productsAll} isLoading={isProductsStatLoading}/>
+                            <ActionButtons filters={{}} total={productsAllCount} isLoading={isProductsStatLoading}/>
                         </Col>
                     </Row>
                 </Space>

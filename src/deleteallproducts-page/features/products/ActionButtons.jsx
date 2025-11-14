@@ -4,6 +4,7 @@ import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteProducts, restoreProducts, trashProducts } from '../../services/apiService';
+import { addProductsAllCount, addProductsTrashCount, subProductsAllCount, subProductsTrashCount } from './productsSlice';
 const { confirm } = Modal;
 
 const ActionButtons = ( {filters, total, isLoading} ) => {
@@ -71,8 +72,23 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
                 }else if(type === 'restore_trash') {
                     response = await dispatch(restoreProducts(params));
                 }
+
+                let totalCount = response.payload?.total ?? 0;
+
+                if( totalCount > 0 ){
+                    if(type === 'delete_permanently' ){
+                        dispatch( subProductsAllCount(totalCount) );
+                    }else if(type === 'move_to_trash') {
+                        dispatch( subProductsAllCount(totalCount) );
+                        dispatch( addProductsTrashCount(totalCount) );
+                    }else if(type === 'restore_trash') {
+                        dispatch( subProductsTrashCount(totalCount) );
+                        dispatch( addProductsAllCount(totalCount) );
+                    }
+                }
+
                 searchCount = response.payload?.search_count;
-                totalExecuted += response.payload?.total;
+                totalExecuted += totalCount;
                 totalProducts = totalExecuted + searchCount;
 
                 setTotalExecuted(totalExecuted);

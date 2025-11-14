@@ -10,7 +10,7 @@ const TrashedProducts = () => {
 
     const dispatch = useDispatch();
 
-    const { isProductsStatLoading, productsTrash } = useSelector((state) => state.products);
+    const { isProductsStatLoading, productsTrashCount } = useSelector((state) => state.products);
 
     const handleRefresh = () => {
         dispatch(fetchProductsStat());
@@ -21,7 +21,7 @@ const TrashedProducts = () => {
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                 <Row>
                     <Col span={24}>
-                        <ActionButtons filters={{ product_status: { trash: true } }} total={productsTrash} isLoading={isProductsStatLoading}/>
+                        <ActionButtons filters={{ product_status: { trash: true } }} total={productsTrashCount} isLoading={isProductsStatLoading}/>
                     </Col>
                 </Row>
             </Space>

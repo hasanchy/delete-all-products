@@ -11,7 +11,7 @@ const AllProducts = () => {
 
     const dispatch = useDispatch();
 
-    const { isProductsStatLoading, productsAllCount } = useSelector((state) => state.products);
+    const { isProductsStatLoading, isTrashingInProgress, isRestoringInProgress, isDeletingInProgress, productsAllCount } = useSelector((state) => state.products);
 
     const handleRefresh = () => {
         dispatch(fetchProductsStat());
@@ -19,7 +19,7 @@ const AllProducts = () => {
 
     return (
         <Space direction="vertical" size="large" style={{ display: 'flex' }}>
-            <Card title="Delete All Products" extra={<Tooltip placement="topLeft" title={ __( 'Reload', 'delete-all-products' ) } color={'purple'} key={'reload'}><Button type="default" icon={<ReloadOutlined/>} onClick={handleRefresh}></Button></Tooltip>}>
+            <Card title="Delete All Products" extra={<Tooltip placement="topLeft" title={ __( 'Reload', 'delete-all-products' ) } color={'purple'} key={'reload'}><Button type="default" disabled={isTrashingInProgress || isRestoringInProgress || isDeletingInProgress} icon={<ReloadOutlined/>} onClick={handleRefresh}></Button></Tooltip>}>
                 <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                     <Row>
                         <Col span={24}>

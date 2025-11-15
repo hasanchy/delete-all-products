@@ -15,8 +15,10 @@ const MenuTabs = () => {
 	const dispatch = useDispatch();
 	const isOperationInProgress = (isTrashingInProgress || isRestoringInProgress || isDeletingInProgress) ? true : false;
 
-	let allLabel = ( isProductsStatLoading ) ? <>All <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `All (${productsAllCount})`;
-	let trashLabel = ( isProductsStatLoading ) ? <>Trash <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `Trash (${productsTrashCount})`;
+	let allCount = ( productsAllCount > 0 ) ? productsAllCount : 0;
+	let trashCount = ( productsTrashCount > 0 ) ? productsTrashCount : 0;
+	let allLabel = ( isProductsStatLoading ) ? <>{__( 'All', 'delete-all-products' )} <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `All (${allCount})`;
+	let trashLabel = ( isProductsStatLoading ) ? <>{__( 'Trash', 'delete-all-products' )} <Spin indicator={<LoadingOutlined spin />} size="small" /></> : `Trash (${trashCount})`;
 	const tabItems = [
 		{
 			key: 'all',

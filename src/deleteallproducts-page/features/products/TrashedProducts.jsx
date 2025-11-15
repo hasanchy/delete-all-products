@@ -10,14 +10,14 @@ const TrashedProducts = () => {
 
     const dispatch = useDispatch();
 
-    const { isProductsStatLoading, productsTrashCount } = useSelector((state) => state.products);
+    const { isProductsStatLoading, productsTrashCount, isTrashingInProgress, isRestoringInProgress, isDeletingInProgress } = useSelector((state) => state.products);
 
     const handleRefresh = () => {
         dispatch(fetchProductsStat());
     }
 
     return (
-        <Card title="Delete/Restore Products From Trash" extra={<Tooltip placement="topLeft" title={ __( 'Reload', 'delete-all-products' ) } color={'purple'} key={'reload'}><Button type="default" icon={<ReloadOutlined/>} onClick={handleRefresh}></Button></Tooltip>}>
+        <Card title="Delete/Restore Products From Trash" extra={<Tooltip placement="topLeft" title={ __( 'Reload', 'delete-all-products' ) } color={'purple'} key={'reload'}><Button type="default" disabled={isTrashingInProgress || isRestoringInProgress || isDeletingInProgress} icon={<ReloadOutlined/>} onClick={handleRefresh}></Button></Tooltip>}>
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
                 <Row>
                     <Col span={24}>

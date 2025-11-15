@@ -3,7 +3,7 @@ import { Button, Col, Modal, Progress, Row, Space, Alert, Spin, Typography } fro
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProducts, restoreProducts, trashProducts } from '../../services/apiService';
+import { deleteProducts, fetchProductsStat, restoreProducts, trashProducts } from '../../services/apiService';
 import { addProductsAllCount, addProductsTrashCount, subProductsAllCount, subProductsTrashCount } from './productsSlice';
 const { confirm } = Modal;
 
@@ -41,7 +41,6 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         setIsOperationInProgress(true);
 
         let totalExecuted = 0;
-        let searchCount = searchResult;
         let totalProducts = searchResult;
 
         setTotalExecuted(totalExecuted);
@@ -58,7 +57,10 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         if (stock_status.length > 0) params.stock_status = stock_status;
         if (product_status.length > 0) params.product_status = product_status;
 
-        while (totalExecuted < totalProducts) {
+        let i = 0;
+        let totalIterations = Math.ceil( total / 10);
+
+        while ( i < totalIterations) {
             if (isOperationCancelled.current) {
                 break; // Exit the loop if trashing is cancelled
             }
@@ -87,19 +89,17 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
                     }
                 }
 
-                searchCount = response.payload?.search_count;
                 totalExecuted += totalCount;
-                totalProducts = totalExecuted + searchCount;
 
                 setTotalExecuted(totalExecuted);
-                setTotalProducts(totalProducts);
-                setSearchResult(searchCount);
             } catch (error) {
                 console.error('Error trashing products:', error);
                 break; // Exit the loop in case of an error
             }
+            i++;
         }
 
+        dispatch( fetchProductsStat() );
         setDisplayProgressBar( false );
         setIsCancellationInProgress( false );
         setDisplayStopButton( false );

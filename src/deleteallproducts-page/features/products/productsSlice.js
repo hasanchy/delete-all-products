@@ -61,8 +61,6 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(trashProducts.fulfilled, (state, action) => {
             state.isTrashingInProgress = false;
-			// state.productsAllCount = action.payload.stat.all;
-			// state.productsTrashCount = action.payload.stat.trash;
 		}),
 		builder.addCase(trashProducts.rejected, (state, action) => {
 			state.isTrashingInProgress = false;
@@ -72,8 +70,6 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(restoreProducts.fulfilled, (state, action) => {
             state.isRestoringInProgress = false;
-			state.productsAllCount = action.payload.stat.all;
-			state.productsTrashCount = action.payload.stat.trash;
 		}),
 		builder.addCase(restoreProducts.rejected, (state, action) => {
 			state.isRestoringInProgress = false;
@@ -83,8 +79,6 @@ export const productsSlice = createSlice({
 		}),
 		builder.addCase(deleteProducts.fulfilled, (state, action) => {
             state.isDeletingInProgress = false;
-			state.productsAllCount = action.payload.stat.all;
-			state.productsTrashCount = action.payload.stat.trash;
 		}),
 		builder.addCase(deleteProducts.rejected, (state, action) => {
 			state.isDeletingInProgress = false;

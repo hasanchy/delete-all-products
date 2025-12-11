@@ -112,7 +112,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         confirm({
             title: 'Delete Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: <Space direction="vertical" size="large" style={{ display: 'flex' }}><div>Are you sure you want to permanently delete <b>{searchResult}</b> {pluralize('product', searchResult)}{trashMessage}?</div><div> <Typography.Text type='secondary'>Want to delete images too? <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>Upgrade to Pro!</a></Typography.Text></div></Space>,
+            content: <Space direction="vertical" size="large" style={{ display: 'flex' }}><div>Are you sure you want to permanently delete <b>{searchResult}</b> {pluralize('product', searchResult)}{trashMessage}?</div><div> <Typography.Text type='secondary'>Want to delete product images too? <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>Upgrade to Pro!</a></Typography.Text></div></Space>,
             okText: 'Yes',
             okButtonProps: {
                 danger: true,

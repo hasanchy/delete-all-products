@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'fabee6c83af707de4470ce730831d31e19b9e532',
+        'reference' => 'd483b0cb50db5789008e5dbe92362d9950a96d6e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'fabee6c83af707de4470ce730831d31e19b9e532',
+            'reference' => 'd483b0cb50db5789008e5dbe92362d9950a96d6e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -31,9 +31,9 @@
             'dev_requirement' => true,
         ),
         'dealerdirect/phpcodesniffer-composer-installer' => array(
-            'pretty_version' => 'v1.1.2',
-            'version' => '1.1.2.0',
-            'reference' => 'e9cf5e4bbf7eeaf9ef5db34938942602838fc2b1',
+            'pretty_version' => 'v1.2.0',
+            'version' => '1.2.0.0',
+            'reference' => '845eb62303d2ca9b289ef216356568ccc075ffd1',
             'type' => 'composer-plugin',
             'install_path' => __DIR__ . '/../dealerdirect/phpcodesniffer-composer-installer',
             'aliases' => array(),
@@ -67,9 +67,9 @@
             'dev_requirement' => true,
         ),
         'phpcompatibility/phpcompatibility-wp' => array(
-            'pretty_version' => '2.1.7',
-            'version' => '2.1.7.0',
-            'reference' => '5bfbbfbabb3df2b9a83e601de9153e4a7111962c',
+            'pretty_version' => '2.1.8',
+            'version' => '2.1.8.0',
+            'reference' => '7c8d18b4d90dac9e86b0869a608fa09158e168fa',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcompatibility/phpcompatibility-wp',
             'aliases' => array(),
@@ -78,7 +78,7 @@
         'phpcsstandards/phpcsextra' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '4eeabc49620e8a582a35f8299f24ca222c753b86',
+            'reference' => 'dfd86b7eb5f77243e0366dd7f2ef1742530c00ce',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsextra',
             'aliases' => array(
@@ -89,7 +89,7 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '8e1aa9fc388f408a9e56bccb9441320f90f1f880',
+            'reference' => 'c216317e96c8b3f5932808f9b0f1f7a14e3bbf55',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(
@@ -100,16 +100,16 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => '3.x-dev',
             'version' => '3.9999999.9999999.9999999-dev',
-            'reference' => '63b78c49263a84007cd2fb131b83d63cf3b4e65d',
+            'reference' => 'be57d1c389be29ff78445a37ae33d07e94ab3c07',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(),
             'dev_requirement' => true,
         ),
         'wp-coding-standards/wpcs' => array(
-            'pretty_version' => '3.2.0',
-            'version' => '3.2.0.0',
-            'reference' => 'd2421de7cec3274ae622c22c744de9a62c7925af',
+            'pretty_version' => '3.3.0',
+            'version' => '3.3.0.0',
+            'reference' => '7795ec6fa05663d716a549d0b44e47ffc8b0d4a6',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../wp-coding-standards/wpcs',
             'aliases' => array(),

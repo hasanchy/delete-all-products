@@ -8,10 +8,10 @@ const SearchProducts = () => {
     return (
         <Card title="Upgrade to Pro">
             <Space direction="vertical" size="large" style={{ display: 'flex' }}>
-                {/* <Alert
-                    description={<>{__( 'Product deletion with filters is available in the', 'delete-all-products' )} <b><a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>{__( 'Pro version', 'delete-all-products' )}</a></b> {__( 'of the plugin.', 'delete-all-products' )}</>}
+                <Alert
+                    description={<>{__( 'Product deletion with filters and product image deletion are available only in the', 'delete-all-products' )} <b><a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>{__( 'Pro version', 'delete-all-products' )}</a></b>.</>}
                     type="info"
-                /> */}
+                />
                 <Row gutter={20}>
                     <Col span={16} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>
@@ -29,10 +29,11 @@ const SearchProducts = () => {
                             <div>{__( 'With', 'delete-all-products' )} <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'><b>{__( 'Product Cleaner for WooCommerce', 'delete-all-products' )}</b></a>{__( ', you can effortlessly filter, delete, or trash WooCommerce products in bulk while tracking progress in real time for a seamless cleanup experience.', 'delete-all-products' )}</div>
                             <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Delete products with or without filters', 'delete-all-products' )}</Typography.Text></div>
                             <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Delete product images on permanent deletion', 'delete-all-products' )}</Typography.Text></div>
-                            <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Preview before deletion', 'delete-all-products' )}</Typography.Text></div>
+                            <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( '2× faster product deletion', 'delete-all-products' )}</Typography.Text></div>
                             <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Track progress in real-time', 'delete-all-products' )}</Typography.Text></div>
-                            <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Get all future updates & improvements', 'delete-all-products' )}</Typography.Text></div>
+                            <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Preview before deletion', 'delete-all-products' )}</Typography.Text></div>
                             <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Enjoy priority support', 'delete-all-products' )}</Typography.Text></div>
+                            <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( 'Get all future updates & improvements', 'delete-all-products' )}</Typography.Text></div>
                             <div><CheckCircleOutlined style={{ color: '#52C41A', fontSize: '18px', marginRight: '8px' }} /> <Typography.Text strong>{__( '30-day money-back guarantee', 'delete-all-products' )}</Typography.Text></div>
                             <div style={{ width: '100%', textAlign: 'center' }}>
                                 <Button

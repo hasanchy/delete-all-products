@@ -4,7 +4,7 @@ Tags: delete products, bulk delete products, remove products, WooCommerce produc
 Requires at least: 5.2
 Tested up to: 6.8
 Requires PHP: 7.2.0
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.en.html
 
@@ -104,6 +104,9 @@ Yes, the plugin includes a "Stop" button that allows you to halt the deletion pr
 You can reinstall the plugin by navigating to "Plugins" > "Add New" in your WordPress dashboard, searching for "Delete All Products by ThemeDyno," and installing it again.
 
 == Changelog ==
+1.5.4 (2025-12-21)
+Improved the reliability of product trash and restore actions.
+
 1.5.3 (2025-12-12)
 Updated Pro version feature details
 

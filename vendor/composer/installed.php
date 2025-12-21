@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd483b0cb50db5789008e5dbe92362d9950a96d6e',
+        'reference' => '2e57742e3a9ba1d5f0d2d10de9e281916fa7bfe6',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd483b0cb50db5789008e5dbe92362d9950a96d6e',
+            'reference' => '2e57742e3a9ba1d5f0d2d10de9e281916fa7bfe6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -100,7 +100,7 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => '3.x-dev',
             'version' => '3.9999999.9999999.9999999-dev',
-            'reference' => 'be57d1c389be29ff78445a37ae33d07e94ab3c07',
+            'reference' => '720868e06c8a6e208e34dfd9d515d3454d88f5d2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(),

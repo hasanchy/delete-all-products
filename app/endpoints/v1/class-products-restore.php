@@ -101,12 +101,7 @@ class ProductsRestore extends Endpoint {
 		foreach ( $posts as $post ) {
 			$product = wc_get_product( $post->ID );
 			if ( $product ) {
-				// Restore the product by setting it to 'publish'
-				$product_data = array(
-					'ID'          => $product->get_id(),
-					'post_status' => 'publish',
-				);
-				wp_update_post( $product_data );
+				wp_untrash_post( $post->ID );
 				++$total_restored;
 			}
 		}

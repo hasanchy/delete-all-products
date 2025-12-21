@@ -111,7 +111,7 @@ class ProductsTrash extends Endpoint {
 		foreach ( $posts as $post ) {
 			$product = wc_get_product( $post->ID );
 			if ( $product ) {
-				$product->delete( false );
+				wp_trash_post( $post->ID );
 				++$total_trashed;
 			}
 		}

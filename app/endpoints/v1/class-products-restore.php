@@ -9,7 +9,6 @@ namespace DAPRODS\App\Endpoints\V1;
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use DAPRODS\Core\Endpoint;
-use DAPRODS\Core\ProductHelper;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -102,21 +101,14 @@ class ProductsRestore extends Endpoint {
 		foreach ( $posts as $post ) {
 			$product = wc_get_product( $post->ID );
 			if ( $product ) {
-				// Restore the product by setting it to 'publish'
-				$product_data = array(
-					'ID'          => $product->get_id(),
-					'post_status' => 'publish',
-				);
-				wp_update_post( $product_data );
+				wp_untrash_post( $post->ID );
 				++$total_restored;
 			}
 		}
 
 		// Prepare response
 		$response = array(
-			'search_count' => ProductHelper::get_product_count( $stock_status, array( 'trash' ) ),
 			'total'        => $total_restored,
-			'stat'         => ProductHelper::get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );

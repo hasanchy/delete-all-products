@@ -3,7 +3,8 @@ import { Button, Col, Modal, Progress, Row, Space, Alert, Spin, Typography } fro
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { __ } from "@wordpress/i18n";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteProducts, restoreProducts, trashProducts } from '../../services/apiService';
+import { deleteProducts, fetchProductsStat, restoreProducts, trashProducts } from '../../services/apiService';
+import { addProductsAllCount, addProductsTrashCount, subProductsAllCount, subProductsTrashCount } from './productsSlice';
 const { confirm } = Modal;
 
 const ActionButtons = ( {filters, total, isLoading} ) => {
@@ -40,7 +41,6 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         setIsOperationInProgress(true);
 
         let totalExecuted = 0;
-        let searchCount = searchResult;
         let totalProducts = searchResult;
 
         setTotalExecuted(totalExecuted);
@@ -57,7 +57,10 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         if (stock_status.length > 0) params.stock_status = stock_status;
         if (product_status.length > 0) params.product_status = product_status;
 
-        while (totalExecuted < totalProducts) {
+        let i = 0;
+        let totalIterations = Math.ceil( total / 10);
+
+        while ( i < totalIterations) {
             if (isOperationCancelled.current) {
                 break; // Exit the loop if trashing is cancelled
             }
@@ -71,19 +74,32 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
                 }else if(type === 'restore_trash') {
                     response = await dispatch(restoreProducts(params));
                 }
-                searchCount = response.payload?.search_count;
-                totalExecuted += response.payload?.total;
-                totalProducts = totalExecuted + searchCount;
+
+                let totalCount = response.payload?.total ?? 0;
+
+                if( totalCount > 0 ){
+                    if(type === 'delete_permanently' ){
+                        dispatch( subProductsAllCount(totalCount) );
+                    }else if(type === 'move_to_trash') {
+                        dispatch( subProductsAllCount(totalCount) );
+                        dispatch( addProductsTrashCount(totalCount) );
+                    }else if(type === 'restore_trash') {
+                        dispatch( subProductsTrashCount(totalCount) );
+                        dispatch( addProductsAllCount(totalCount) );
+                    }
+                }
+
+                totalExecuted += totalCount;
 
                 setTotalExecuted(totalExecuted);
-                setTotalProducts(totalProducts);
-                setSearchResult(searchCount);
             } catch (error) {
                 console.error('Error trashing products:', error);
                 break; // Exit the loop in case of an error
             }
+            i++;
         }
 
+        dispatch( fetchProductsStat() );
         setDisplayProgressBar( false );
         setIsCancellationInProgress( false );
         setDisplayStopButton( false );
@@ -96,7 +112,7 @@ const ActionButtons = ( {filters, total, isLoading} ) => {
         confirm({
             title: 'Delete Confirmation',
             icon: <ExclamationCircleFilled />,
-            content: <Space direction="vertical" size="large" style={{ display: 'flex' }}><div>Are you sure you want to permanently delete <b>{searchResult}</b> {pluralize('product', searchResult)}{trashMessage}?</div><div> <Typography.Text type='secondary'>Want to delete images too? <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>Upgrade to Pro!</a></Typography.Text></div></Space>,
+            content: <Space direction="vertical" size="large" style={{ display: 'flex' }}><div>Are you sure you want to permanently delete <b>{searchResult}</b> {pluralize('product', searchResult)}{trashMessage}?</div><div> <Typography.Text type='secondary'>Want to delete product images too? <a href='https://woocommerce.com/products/product-cleaner-for-woocommerce/' target='_blank'>Upgrade to Pro!</a></Typography.Text></div></Space>,
             okText: 'Yes',
             okButtonProps: {
                 danger: true,

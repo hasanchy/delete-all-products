@@ -9,7 +9,6 @@ namespace DAPRODS\App\Endpoints\V1;
 defined( 'ABSPATH' ) || die( 'No direct access allowed!' );
 
 use DAPRODS\Core\Endpoint;
-use DAPRODS\Core\ProductHelper;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -112,16 +111,14 @@ class ProductsTrash extends Endpoint {
 		foreach ( $posts as $post ) {
 			$product = wc_get_product( $post->ID );
 			if ( $product ) {
-				$product->delete( false );
+				wp_trash_post( $post->ID );
 				++$total_trashed;
 			}
 		}
 
 		// Prepare the response data
 		$response = array(
-			'search_count' => ProductHelper::get_product_count( $stock_status, $product_status ),
 			'total'        => $total_trashed,
-			'stat'         => ProductHelper::get_product_stat(),
 		);
 
 		return new WP_REST_Response( $response );

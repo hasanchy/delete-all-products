@@ -2,6 +2,7 @@
     "description": "Efficiently delete all WooCommerce products in just a few clicks.",
     "license": "GPL-3.0-or-later",
     "config": {
+        "autoloader-suffix": "DAPRODS_4b8e1d9a7f3c6a2e5d0b9c1f8a7e4d6c",
         "sort-packages": true,
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
@@ -12,19 +13,13 @@
             "name": "Hasan Chowdhury"
         }
     ],
-    "extra": {
-        "mozart": {
-            "classmap_prefix": "DAPRODS"
-        }
-    },
     "require": {
 		"php": ">=7.4"
 	},
     "require-dev": {
-        "coenjacobs/mozart": "dev-master",
-        "wp-coding-standards/wpcs": "^3.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-        "phpcompatibility/phpcompatibility-wp": "^2.1"
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "wp-coding-standards/wpcs": "^3.0"
     },
     "scripts": {
         "phpcs": "vendor/bin/phpcs --standard=phpcs.xml",
